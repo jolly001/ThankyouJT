@@ -1,4 +1,11 @@
 target/
+test-output/
+.html/
+.png/
+.class/
+.prefs/
+.json/
+
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
