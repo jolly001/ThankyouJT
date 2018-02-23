@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test">
+	
+
+ 	 <test name="ToVerifyUserIsOnSettingsPage">
+		<classes>
+			<class name="com.ThankYouProject.testCases.SettingsPageTest" />
+		</classes>
+	</test>
+ 	
+  <test name="ToVerifyUserEditsProfile">
+		<classes>
+			<class name="com.ThankYouProject.testCases.TotestUserIsAbleToEditProfile" />
+		</classes>
+	</test>
+	<test name="ToVerifyUserRegisters">
+		<classes>
+			<class name="com.ThankYouProject.testCases.ToTestUserIsAbleToRegister" />
+		</classes>
+	</test>
+	<test name="ToVerifyToSAndPP">
+		<classes>
+			<class name="com.ThankYouProject.testCases.ToVerifyTermsOfServiceAndPrivacyPolicy" />
+		</classes>
+	</test>
+	<test name="UserASendsThanks">
+		<classes>
+			<class name="com.ThankYouProject.testCases.UserASendsThank" />
+		</classes>
+	</test>
+	<test name="VisitHomePage">
+		<classes>
+			<class name="com.ThankYouProject.testCases.VerifyAbleToVisitHomePage" />
+		</classes>
+	</test>
+	
+
+</suite> 
