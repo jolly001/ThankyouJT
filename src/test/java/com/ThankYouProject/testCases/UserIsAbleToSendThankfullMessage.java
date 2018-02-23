@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class UserASendsThank extends BaseClass {
+public class UserIsAbleToSendThankfullMessage extends BaseClass {
 	HomePage obj;
 
 	@BeforeTest
@@ -18,7 +18,7 @@ public class UserASendsThank extends BaseClass {
 	}
 
 	@Test
-	public void verifyUserASendsThank() throws Exception {
+	public void userIsAbleToSendThankfullMessage() throws Exception {
 		obj.userAReg();
 
 	}

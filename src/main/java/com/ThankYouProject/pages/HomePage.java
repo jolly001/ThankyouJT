@@ -107,9 +107,8 @@ public class HomePage extends BaseClass {
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		// common.applywait();
 		// if the user is a new user
-		if (driver.findElements(By.xpath("//android.widget.Button[contains(@resource-id,'btnImport')]")).size() == 0
-				&& driver.findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'tvTitle')]"))
-						.size() == 1) {
+
+		if (common.getWebElements("profPageTitle").size() == 1) {
 			common.sendKeys("enterUserName", driver, "userANameTD");
 			common.click("myFaithTab", driver);
 			common.sendKeys("enterGodName", driver, "userAGodTD");
@@ -128,8 +127,7 @@ public class HomePage extends BaseClass {
 			common.checkIfElementIsEnabled("verifyHomePage", driver);
 			// if the same user is logging in again and has not imported the
 			// contacts
-		} else if (driver.findElements(By.xpath("//android.widget.Button[contains(@resource-id,'btnImport')]"))
-				.size() == 1) {
+		} else if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
 			common.checkIfElementIsEnabled("verifyHomePage", driver);
 
@@ -172,25 +170,20 @@ public class HomePage extends BaseClass {
 		// common.applywait();
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		// common.applywait();
-		if (driver.findElements(By.xpath("//android.widget.Button[contains(@resource-id,'btnImport')]")).size() == 1) {
+		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
-
 			Assert.assertTrue(true, "You are on home page");
-			try {
-				System.out.println("this user is old approah 1");
-				common.click("selGod", driver);
-				common.click("godTutSkip", driver);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("this user is old approah 1");
-				common.click("selGod", driver);
-				common.click("selGod", driver);
+			common.click("selUserContact", driver);
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			common.click("thankful", driver);
+			common.click("sayThanksbtn", driver);
+			// common.applywait();
+			common.click("clicktosendThanks", driver);
+			// common.applywait();
+			common.click("grateful", driver);
 
-			}
-		} else if (driver.findElements(By.xpath("//android.widget.Button[contains(@resource-id,'btnImport')]"))
-				.size() == 0
-				&& driver.findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'tvTitle')]"))
-						.size() == 1) {
+		} else if (common.getWebElements("profPageTitle").size() == 1) {
 			common.sendKeys("enterUserName", driver, "userANameTD");
 			common.click("myFaithTab", driver);
 			common.sendKeys("enterGodName", driver, "userAGodTD");
@@ -209,18 +202,8 @@ public class HomePage extends BaseClass {
 		}
 
 		else {
-			try {
-				System.out.println("this user is old approah 2");
-				common.click("selGod", driver);
-				common.click("godTutSkip", driver);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("this user is old approah 2");
-				common.click("selGod", driver);
-				common.click("selGod", driver);
 
-			}
-			Assert.assertTrue(true, "You are on home page");
+			common.checkIfElementIsEnabled("verifyHomePage", driver);
 		}
 
 		common.click("selUserContact", driver);
