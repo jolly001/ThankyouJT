@@ -23,6 +23,7 @@ public class SettingsPageTest extends BaseClass {
 	@AfterTest
 	public void killApp(){
 		driver.closeApp();
+		//@25feb
 	}
 	
 }
