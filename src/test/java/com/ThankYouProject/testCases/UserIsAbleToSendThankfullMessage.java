@@ -2,6 +2,7 @@ package com.ThankYouProject.testCases;
 
 import java.io.IOException;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -19,8 +20,11 @@ public class UserIsAbleToSendThankfullMessage extends BaseClass {
 
 	@Test
 	public void userIsAbleToSendThankfullMessage() throws Exception {
-		obj.userAReg();
+		obj.userASendsThankfulMessage();
 
 	}
-
+	@AfterTest
+	public void killApp(){
+		driver.closeApp();
+	}
 }

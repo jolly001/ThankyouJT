@@ -13,6 +13,7 @@ import org.testng.Assert;
 
 import com.ThankYouProject.testBase.BaseClass;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
@@ -76,37 +77,31 @@ public class CommonFunctions extends BaseClass {
 		else
 			throw new Exception("Unknown locator type '" + locatorType + "'");
 	}
-	
-	public List<WebElement> getWebElements(String locator) throws Exception{
+
+	public List<WebElement> getWebElements(String locator) throws Exception {
 		return getLocators(loc.getProperty(locator));
 	}
 
-
-
-public  List getLocators(String locator) throws Exception {
-        String[] split = locator.split(":");
+	public List getLocators(String locator) throws Exception {
+		String[] split = locator.split(":");
 		String locatorType = split[0];
 		String locatorValue = split[1];
-		System.out.println("locatorType:-"+locatorType);
-		System.out.println("locatorValue:-"+locatorValue);
+		System.out.println("locatorType:-" + locatorType);
+		System.out.println("locatorValue:-" + locatorValue);
 
 		if (locatorType.toLowerCase().equals("id"))
 			return driver.findElements(By.id(locatorValue));
 		else if (locatorType.toLowerCase().equals("name"))
 			return driver.findElements(By.name(locatorValue));
-		else if ((locatorType.toLowerCase().equals("classname"))
-				|| (locatorType.toLowerCase().equals("class")))
+		else if ((locatorType.toLowerCase().equals("classname")) || (locatorType.toLowerCase().equals("class")))
 			return driver.findElements(By.className(locatorValue));
-		else if ((locatorType.toLowerCase().equals("tagname"))
-				|| (locatorType.toLowerCase().equals("tag")))
+		else if ((locatorType.toLowerCase().equals("tagname")) || (locatorType.toLowerCase().equals("tag")))
 			return driver.findElements(By.className(locatorValue));
-		else if ((locatorType.toLowerCase().equals("linktext"))
-				|| (locatorType.toLowerCase().equals("link")))
+		else if ((locatorType.toLowerCase().equals("linktext")) || (locatorType.toLowerCase().equals("link")))
 			return driver.findElements(By.linkText(locatorValue));
 		else if (locatorType.toLowerCase().equals("partiallinktext"))
 			return driver.findElements(By.partialLinkText(locatorValue));
-		else if ((locatorType.toLowerCase().equals("cssselector"))
-				|| (locatorType.toLowerCase().equals("css")))
+		else if ((locatorType.toLowerCase().equals("cssselector")) || (locatorType.toLowerCase().equals("css")))
 			return driver.findElements(By.cssSelector(locatorValue));
 		else if (locatorType.toLowerCase().equals("xpath"))
 			return driver.findElements(By.xpath(locatorValue));
@@ -176,4 +171,46 @@ public  List getLocators(String locator) throws Exception {
 
 	}
 
+	public TouchAction tap(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
+
+		TouchAction action = new TouchAction(driver);
+
+		return action.tap(getWebElement(locator)).perform();
+
+	}
+
+	public TouchAction press(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
+		TouchAction action = new TouchAction(driver);
+		return action.press(getWebElement(locator)).moveTo(getWebElement(locator)).release().perform();
+
+	}
+
+	public void horizontalSwipe() {
+		Dimension dim = driver.manage().window().getSize();
+		int height = dim.getHeight();
+		int width = dim.getHeight();
+		int y = (int) (height * 0.20);
+		int startx = (int) (width * 0.75);
+		int endx = (int) (width * 0.35);
+		driver.swipe(startx, y, endx, y, 500);
+	}
+
+	public void swipeUpToContact(String locator, AndroidDriver<AndroidElement> driver) {
+		boolean f = false;
+		for (int i = 0; i <= 10; i++) {
+			try {
+				driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+				getWebElement(locator).isDisplayed();
+				f = true;
+				break;
+			} catch (Exception e) {
+				horizontalSwipe();
+			}
+			if (f) {
+				System.out.println("Passed");
+			} else {
+				System.out.println("Failed");
+			}
+		}
+	}
 }

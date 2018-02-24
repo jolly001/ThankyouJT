@@ -23,6 +23,7 @@ import org.testng.annotations.BeforeMethod;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.IExtentTestClass;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -37,47 +38,56 @@ public class BaseClass {
 	public static AndroidDriver<AndroidElement> driver;
 	public static ExtentReports extent;
 	public static ExtentTest extentTest;
+
+
 	public void initialization() throws IOException {
 		loadProperties();
 		driver = capabilities();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 	}
-	
+
 	static {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/ThankYouProject/testReport/" + formater.format(calendar.getTime()) + ".html", false);
+		/*extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/ThankYouProject/testReport/"
+				+ formater.format(calendar.getTime()) + ".html", false);*/
+		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/ThankYouProject/testReport/"
+				+ "ThankyouProjectAutomationReport" + ".html", true);
+		
 	}
-	
+
 	public void getresult(ITestResult result) throws IOException {
 		if (result.getStatus() == ITestResult.SUCCESS) {
-            extentTest.log(LogStatus.PASS, result.getName() + " test is pass");
+			extentTest.log(LogStatus.PASS, result.getName() + " test is pass");
+			String PassLabel = "<span style='border:1px solid green;border-radius: 5px; padding:1px;background:green;color:white;margin-right:2px;'>PASS</span>";
+			//String html = PassLabel + "<span style='color:green;'>" + " : Test is Pass" + "</span>";
+			extentTest.log(LogStatus.PASS, PassLabel);
+
 		} else if (result.getStatus() == ITestResult.SKIP) {
-			extentTest.log(LogStatus.SKIP, result.getName() + " test is skipped and skip reason is:-" + result.getThrowable());
+			extentTest.log(LogStatus.SKIP,result.getName() + " test is skipped and skip reason is:-" + result.getThrowable());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			extentTest.log(LogStatus.FAIL, result.getName() + " test is failed" + result.getThrowable());
-			String screen = getScreenShot("");
-			extentTest.log(LogStatus.FAIL, extentTest.addScreenCapture(screen));
+			String FailLabel = "<span style='border:1px solid red;border-radius: 5px; padding:1px;background:red;color:white;margin-right:2px;'>FAIL</span>";
+			//String html = FailLabel + "<span style='color:red;'>" + " : Test is Failed" + "</span>";
+
+			extentTest.log(LogStatus.FAIL, FailLabel);
+			String FailLabel1 = "<span style='border:1px solid red;border-radius: 5px; padding:1px;background:red;color:white;margin-right:2px;'>FAIL SCREENSHOT</span>";
+
+			extentTest.log(LogStatus.FAIL, FailLabel1);
+		
+			extentTest.log(LogStatus.FAIL, extentTest.addBase64ScreenShot("data:image/png;base64," + CaptureScreenForReport_Base64()));
+
 		} else if (result.getStatus() == ITestResult.STARTED) {
 			extentTest.log(LogStatus.INFO, result.getName() + " test is started");
 		}
 	}
 	
-public String getScreenShot(String imageName) throws IOException{
-		
-		if(imageName.equals("")){
-			imageName = "blank";
-		}
-		File image = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String imagelocation = System.getProperty("user.dir")+"/screenshots/";
-		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		String actualImageName = imagelocation+imageName+"_"+formater.format(calendar.getTime())+".png";
-		File destFile = new File(actualImageName);
-		FileUtils.copyFile(image, destFile);
-		return actualImageName;
-	}
+	public static String CaptureScreenForReport_Base64() {
+       return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
+        
+      }
+
 	
 	@AfterMethod()
 	public void afterMethod(ITestResult result) throws IOException {
@@ -87,12 +97,17 @@ public String getScreenShot(String imageName) throws IOException{
 	@BeforeMethod()
 	public void beforeMethod(Method result) {
 		extentTest = extent.startTest(result.getName());
+
+		//extentTest = extent.startTest((this.getClass().getSimpleName() + "::" + result.getName()), result.getName());
 		extentTest.log(LogStatus.INFO, result.getName() + " test Started");
+
+		extentTest.assignAuthor("Nature9");
+		// extentTest.assignCategory("Regression Test");
 	}
-	
+
 	@AfterClass(alwaysRun = true)
 	public void endTest() {
-		//driver.quit();
+		// driver.quit();
 		extent.endTest(extentTest);
 		extent.flush();
 	}
