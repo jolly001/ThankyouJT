@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.ScrollAction;
 import org.testng.Assert;
 
 import com.ThankYouProject.testBase.BaseClass;
@@ -20,6 +21,8 @@ import io.appium.java_client.android.AndroidElement;
 public class HomePage extends BaseClass {
 	AndroidDriver<AndroidElement> driver;
 	CommonFunctions common = new CommonFunctions();
+	int initial_result;
+	int size = 0;
 
 	public HomePage(AndroidDriver<AndroidElement> driver) {
 
@@ -78,9 +81,9 @@ public class HomePage extends BaseClass {
 		common.click("verifybutton", driver);
 		extentTest.log(LogStatus.INFO, "Clicked on verify button");
 		Thread.sleep(1000);
-		for (int i = 0; i < 5; i++) {
-			common.click("allowPopup", driver);
-		}
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
 		common.randomnumgen();
@@ -111,9 +114,9 @@ public class HomePage extends BaseClass {
 		common.sendKeys("enterNum", driver, "numberTD");
 		common.click("verifybutton", driver);
 
-		for (int i = 0; i < 5; i++) {
-			common.click("allowPopup", driver);
-		}
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		// common.applywait();
 		// if the user is a new user
@@ -174,16 +177,85 @@ public class HomePage extends BaseClass {
 
 	}
 
+	public void userASendsGratefulMessage() throws Exception {
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "user1NumTD");
+		common.click("verifybutton", driver);
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			common.click("skip&conbutton", driver);
+			common.click("selUserContact", driver);
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			common.click("grateful", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.getText("gratefulVerify", driver);
+			common.verifyTitle("gratefulVerify", driver, "gratefulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Grateful");
+
+		} else if (common.getWebElements("profPageTitle").size() == 1) {
+			common.sendKeys("enterUserName", driver, "userANameTD");
+			common.click("myFaithTab", driver);
+			common.sendKeys("enterGodName", driver, "userAGodTD");
+			common.click("saveBtn", driver);
+			System.out.println("Save is clicked");
+			Thread.sleep(5000);
+			common.click("userTutorial", driver);
+			Thread.sleep(5000);
+			common.click("skip&conbutton", driver);
+			Thread.sleep(10000);
+			common.click("selGod", driver);
+			// common.applywait();
+			common.click("godTutSkip", driver);
+			common.tap("selUserContact", driver);
+			extentTest.log(LogStatus.INFO, "The user name is selected");
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			extentTest.log(LogStatus.INFO, "The user has selected tankful message");
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("gratefulVerify", driver, "gratefulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Grateful");
+
+		} else {
+
+			common.tap("selUserContact", driver);
+			extentTest.log(LogStatus.INFO, "The user name is selected");
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			extentTest.log(LogStatus.INFO, "The user has selected tankful message");
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("gratefulVerify", driver, "gratefulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Grateful");
+		}
+
+	}
+
 	public void userASendsThankfulMessage() throws Exception {
 		common.click(("agreeBttn"), driver);
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.sendKeys("enterNum", driver, "userANumTD");
+		common.sendKeys("enterNum", driver, "user1NumTD");
 		common.click("verifybutton", driver);
-		for (int i = 0; i < 5; i++) {
-			common.click("allowPopup", driver);
-		}
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
@@ -195,9 +267,10 @@ public class HomePage extends BaseClass {
 			common.click("clicktosendThanks", driver);
 			common.click("grateful", driver);
 			extentTest.log(LogStatus.INFO, "Thanks has been sent");
-//			String actual=common.getText("thankfulText", driver);
-//			System.out.println(actual);
-			
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
+
 		} else if (common.getWebElements("profPageTitle").size() == 1) {
 			common.sendKeys("enterUserName", driver, "userANameTD");
 			common.click("myFaithTab", driver);
@@ -221,9 +294,9 @@ public class HomePage extends BaseClass {
 			common.click("sayThanksbtn", driver);
 			common.click("clicktosendThanks", driver);
 			extentTest.log(LogStatus.INFO, "Thanks has been sent");
-//			String actual=common.getText("thankfulText", driver);
-//			System.out.println(actual);
-			
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
 
 		} else {
 
@@ -236,41 +309,250 @@ public class HomePage extends BaseClass {
 			common.click("sayThanksbtn", driver);
 			common.click("clicktosendThanks", driver);
 			extentTest.log(LogStatus.INFO, "Thanks has been sent");
-//			String actual=common.getText("thankfulText", driver);
-//			System.out.println("jsjdjbjwsdbjsbdb"+ actual);
-
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
 		}
 
 	}
 
-	public void userBReg() throws Exception {
+	public int userBReceivesThankfulMessage() throws Exception {
 		common.click(("agreeBttn"), driver);
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
 		common.sendKeys("enterNum", driver, "userBNumTD");
 		common.click("verifybutton", driver);
-		for (int i = 0; i < 5; i++) {
-			common.click("allowPopup", driver);
-		}
-		//// common.applywait();
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
-		//// common.applywait();
-		if (driver.findElements(By.xpath("//android.widget.Button[contains(@resource-id,'btnImport')]")).size() == 1) {
+		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
-			Assert.assertTrue(true, "You are on home page");
-		}
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			String initial_count = common.getText("userBScore", driver);
+			initial_result = Integer.parseInt(initial_count);
+			System.out.println(initial_result);
+			extentTest.log(LogStatus.INFO, "User B initial score stored");
 
-		else {
-
+		} else if (common.getWebElements("profPageTitle").size() == 1) {
 			common.sendKeys("enterUserName", driver, "userBNameTD");
 			common.click("myFaithTab", driver);
 			common.sendKeys("enterGodName", driver, "userBGodTD");
 			common.click("saveBtn", driver);
+			System.out.println("Save is clicked");
+			Thread.sleep(5000);
 			common.click("userTutorial", driver);
-			//// common.applywait();
+			Thread.sleep(5000);
 			common.click("skip&conbutton", driver);
+			Thread.sleep(10000);
+			common.click("selGod", driver);
+			// common.applywait();
+			common.click("godTutSkip", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			String initial_count = common.getText("userBScore", driver);
+			initial_result = Integer.parseInt(initial_count);
+			System.out.println(initial_result);
+			extentTest.log(LogStatus.INFO, "User B initial score stored");
+
+		} else {
+
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			System.out.println(common.getText("userBScore", driver));
+			String initial_count = common.getText("userBScore", driver);
+			initial_result = Integer.parseInt(initial_count);
+			System.out.println(initial_result);
+			extentTest.log(LogStatus.INFO, "User B initial score stored");
+
+		}
+		return initial_result;
+
+	}
+
+	public void userBlogin() throws Exception {
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userBNumTD");
+		common.click("verifybutton", driver);
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			common.click("skip&conbutton", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			String final_count = common.getText("userBScore", driver);
+
+			System.out.println(initial_result);
+			int final_result = Integer.parseInt(final_count);
+			System.out.println(final_result);
+			extentTest.log(LogStatus.INFO, "User B final score stored");
+			if (final_result > initial_result) {
+				extentTest.log(LogStatus.INFO, "User B has received thanks");
+			} else {
+				extentTest.log(LogStatus.FAIL, "User B has not received thanks");
+			}
+			common.click("scoreClick", driver);
+			common.click("receivedThanksTab", driver);
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+
+		}
+	}
+
+	public void ToVerifyTheSenderMessagesCount() throws Exception {
+
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			common.click("skip&conbutton", driver);
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+			String a = "11:22 PM"; /// last element in the list
+			Boolean found_result = false;
+
+			while (!found_result) {
+
+				List<AndroidElement> ele = driver
+						.findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'tvTime')]"));
+
+				Thread.sleep(2000);
+
+				size = size + ele.size();
+				System.out.println(size);
+				Thread.sleep(2000);
+				// System.out.println("before For ---->" + size);
+
+				for (int i = 0; i <= 2; i++) {
+
+					String s = ele.get(i).getText();
+					if (s.equals(a)) {
+						found_result = true;
+						// System.out.println("Before Break" + size);
+						break;
+					}
+
+				}
+				if (!found_result) {
+					// find startx,starty, and Endy
+					driver.swipe(540, 1435, 540, 358, 3000);
+				}
+
+			}
+			String t = common.getText("givenThankTabCount", driver);
+			int p = Integer.parseInt(t);
+			Assert.assertEquals(size, p, "The given thanks count is correct");
+			extentTest.log(LogStatus.PASS, "The given thanks count is correct ");
+
+		} else if (common.getWebElements("profPageTitle").size() == 1) {
+			common.sendKeys("enterUserName", driver, "userANameTD");
+			common.click("myFaithTab", driver);
+			common.sendKeys("enterGodName", driver, "userAGodTD");
+			common.click("saveBtn", driver);
+			System.out.println("Save is clicked");
+			Thread.sleep(5000);
+			common.click("userTutorial", driver);
+			Thread.sleep(5000);
+			common.click("skip&conbutton", driver);
+			Thread.sleep(10000);
+			common.click("selGod", driver);
+			// common.applywait();
+			common.click("godTutSkip", driver);
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+
+			String a = "11:22 PM"; /// last element in the list
+			Boolean found_result = false;
+
+			while (!found_result) {
+
+				List<AndroidElement> ele = driver
+						.findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'tvTime')]"));
+
+				Thread.sleep(2000);
+
+				size = size + ele.size();
+				// System.out.println(size);
+				Thread.sleep(2000);
+				// System.out.println("before For ---->" + size);
+
+				for (int i = 0; i <= 2; i++) {
+
+					String s = ele.get(i).getText();
+					if (s.equals(a)) {
+						found_result = true;
+						// System.out.println("Before Break" + size);
+						break;
+					}
+
+				}
+				if (!found_result) {
+					// find startx,starty, and Endy
+					driver.swipe(540, 1435, 540, 358, 3000);
+				}
+
+			}
+			String t = common.getText("givenThankTabCount", driver);
+			int p = Integer.parseInt(t);
+			Assert.assertEquals(size, p, "The given thanks count is correct");
+			extentTest.log(LogStatus.PASS, "The given thanks count is correct ");
+		}
+
+		else {
+
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+
+			String a = "11:22 PM"; /// last element in the list
+			Boolean found_result = false;
+
+			while (!found_result) {
+
+				List<AndroidElement> ele = driver
+						.findElements(By.xpath("//android.widget.TextView[contains(@resource-id,'tvTime')]"));
+
+				Thread.sleep(2000);
+
+				size = size + ele.size();
+				// System.out.println(size);
+				Thread.sleep(2000);
+				// System.out.println("before For ---->" + size);
+
+				for (int i = 0; i <= 2; i++) {
+
+					String s = ele.get(i).getText();
+					if (s.equals(a)) {
+						found_result = true;
+						// System.out.println("Before Break" + size);
+						break;
+					}
+
+				}
+				if (!found_result) {
+					// find startx,starty, and Endy
+					driver.swipe(540, 1435, 540, 358, 3000);
+				}
+
+			}
+
+			String t = common.getText("givenThankTabCount", driver);
+			int p = Integer.parseInt(t);
+			Assert.assertEquals(size, p, "The given thanks count is correct");
+			extentTest.log(LogStatus.PASS, "The given thanks count is correct ");
 		}
 
 	}
+
 }

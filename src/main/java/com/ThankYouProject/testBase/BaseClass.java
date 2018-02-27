@@ -120,6 +120,7 @@ public class BaseClass {
 		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, test.getProperty("EmulatorNameTD"));
 		capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
 		capabilities.setCapability("autoAcceptAlerts", true);
+		capabilities.setCapability("autoGrantPermissions", "true");
 		driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		return driver;
 

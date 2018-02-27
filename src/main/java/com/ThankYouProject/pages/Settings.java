@@ -26,9 +26,9 @@ public class Settings extends BaseClass {
 		common.click("verifybutton", driver);
 		 extentTest.log(LogStatus.INFO, "Clicked on verify button");
 
-		for (int i = 0; i < 5; i++) {
-			common.click("allowPopup", driver);
-		}
+//		for (int i = 0; i < 5; i++) {
+//			common.click("allowPopup", driver);
+//		}
 		
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		//common.applywait();

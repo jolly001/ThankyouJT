@@ -6,24 +6,26 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.ThankYouProject.pages.Settings;
+import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class SettingsPageTest extends BaseClass {
-	Settings settings;
+public class UserAsendsThanksToUserB extends BaseClass {
+	HomePage obj;
+
 	@BeforeTest
-	public void setup() throws IOException{
+	public void setup() throws IOException {
 		initialization();
-		settings=new Settings(driver);
+		obj = new HomePage(driver);
 	}
+
 	@Test
-	public void settingsPageTest() throws Exception{
-		settings.goToSettingPage();
+	public void userAloginToSendThanksToUserB() throws Exception {
+		obj.userASendsThankfulMessage();
 	}
+	
 	@AfterTest
 	public void killApp(){
 		driver.closeApp();
-		//@25feb18
 	}
-	
+
 }

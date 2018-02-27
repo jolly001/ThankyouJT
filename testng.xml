@@ -29,9 +29,30 @@
 			<class name="com.ThankYouProject.testCases.UserIsAbleToSendThankfullMessage" />
 		</classes>
 	</test>
+	<test name="UserisAbleToSendGratefulMssage">
+		<classes>
+			<class name="com.ThankYouProject.testCases.UserisAbleToSendGratefulMssage" />
+		</classes>
+	</test>
+	
 	<test name="VisitHomePage">
 		<classes>
 			<class name="com.ThankYouProject.testCases.VerifyAbleToVisitHomePage" />
+		</classes>
+	</test>
+	<test name="UserBChecksInitialMessageCount">
+		<classes>
+			<class name="com.ThankYouProject.testCases.UserBloggedInToCheckInitialMessageCount" />
+		</classes>
+	</test>
+	<test name="UserAsendsThanksToUserB">
+		<classes>
+			<class name="com.ThankYouProject.testCases.UserAsendsThanksToUserB" />
+		</classes>
+	</test>
+	<test name="UserBloggedInAgainToCheckThanks">
+		<classes>
+			<class name="com.ThankYouProject.testCases.UserBloggedInAgainToCheckThanks" />
 		</classes>
 	</test>
 	
