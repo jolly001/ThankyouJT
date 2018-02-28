@@ -21,7 +21,9 @@ import io.appium.java_client.android.AndroidElement;
 public class HomePage extends BaseClass {
 	AndroidDriver<AndroidElement> driver;
 	CommonFunctions common = new CommonFunctions();
-	int initial_result;
+	int beforeReceiveCount = 0;
+	int afterReceieveCount = 0;
+	int final_result;
 	int size = 0;
 
 	public HomePage(AndroidDriver<AndroidElement> driver) {
@@ -29,23 +31,20 @@ public class HomePage extends BaseClass {
 		this.driver = driver;
 	}
 
-	public void spalshScreen() {
-		//// common.applywait();
-		try {
-			if (driver
-					.findElement(By.xpath("//android.widget.ProgressBar[contains(@resource-id,'splash_progress_bar')]"))
-					.isDisplayed() == true) {
-				Assert.assertTrue(true, "You are on the splash screen and the progress bar is detected");
-			} else
-				Assert.assertTrue(false, "splash screen not detected");
+	public void welcomeScreen() {
 
-		} catch (InvalidSelectorException e) {
-			System.out.println(e);
-		}
+		String activityName = driver.currentActivity();
+
+		common.assertionMethod(activityName, driver, "welcomeScreenTD");
 
 	}
+	
+	public void splashScreen(){
+		String activityName= driver.currentActivity();
+		common.assertionMethod(activityName, driver, "spashScreenTD");
+	}
 
-	public void welcomeScreen() throws Exception {
+	public void verifyTOAndPP() throws Exception {
 		// common.applywait();
 		common.verifyTitle("welcomePage", driver, "welcomeTextTD");
 		common.click("termsOfServ", driver);
@@ -167,7 +166,7 @@ public class HomePage extends BaseClass {
 		common.sendKeys("enterGodName", driver, "editGodNameTD");
 		common.click("saveBtn", driver);
 		// Thread.sleep(5000);
-		// common.click("skip&conbutton", driver);
+		common.click("skip&conbutton", driver);
 		common.click("userProfPic", driver);
 		common.verifyTitle("enterUserName", driver, "confirmUsernameTD");
 		extentTest.log(LogStatus.INFO, "The user name is edited successfully");
@@ -182,7 +181,7 @@ public class HomePage extends BaseClass {
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.sendKeys("enterNum", driver, "user1NumTD");
+		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
 		// for (int i = 0; i < 5; i++) {
 		// common.click("allowPopup", driver);
@@ -251,7 +250,7 @@ public class HomePage extends BaseClass {
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.sendKeys("enterNum", driver, "user1NumTD");
+		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
 		// for (int i = 0; i < 5; i++) {
 		// common.click("allowPopup", driver);
@@ -333,8 +332,8 @@ public class HomePage extends BaseClass {
 			common.click("skip&conbutton", driver);
 			extentTest.log(LogStatus.INFO, "User B has logged in");
 			String initial_count = common.getText("userBScore", driver);
-			initial_result = Integer.parseInt(initial_count);
-			System.out.println(initial_result);
+			beforeReceiveCount = Integer.parseInt(initial_count);
+			System.out.println(beforeReceiveCount);
 			extentTest.log(LogStatus.INFO, "User B initial score stored");
 
 		} else if (common.getWebElements("profPageTitle").size() == 1) {
@@ -353,8 +352,8 @@ public class HomePage extends BaseClass {
 			common.click("godTutSkip", driver);
 			extentTest.log(LogStatus.INFO, "User B has logged in");
 			String initial_count = common.getText("userBScore", driver);
-			initial_result = Integer.parseInt(initial_count);
-			System.out.println(initial_result);
+			beforeReceiveCount = Integer.parseInt(initial_count);
+			System.out.println(beforeReceiveCount);
 			extentTest.log(LogStatus.INFO, "User B initial score stored");
 
 		} else {
@@ -362,12 +361,12 @@ public class HomePage extends BaseClass {
 			extentTest.log(LogStatus.INFO, "User B has logged in");
 			System.out.println(common.getText("userBScore", driver));
 			String initial_count = common.getText("userBScore", driver);
-			initial_result = Integer.parseInt(initial_count);
-			System.out.println(initial_result);
+			beforeReceiveCount = Integer.parseInt(initial_count);
+			System.out.println(beforeReceiveCount);
 			extentTest.log(LogStatus.INFO, "User B initial score stored");
 
 		}
-		return initial_result;
+		return beforeReceiveCount;
 
 	}
 
@@ -387,11 +386,11 @@ public class HomePage extends BaseClass {
 			extentTest.log(LogStatus.INFO, "User B has logged in");
 			String final_count = common.getText("userBScore", driver);
 
-			System.out.println(initial_result);
+			System.out.println(beforeReceiveCount);
 			int final_result = Integer.parseInt(final_count);
 			System.out.println(final_result);
 			extentTest.log(LogStatus.INFO, "User B final score stored");
-			if (final_result > initial_result) {
+			if (final_result > beforeReceiveCount) {
 				extentTest.log(LogStatus.INFO, "User B has received thanks");
 			} else {
 				extentTest.log(LogStatus.FAIL, "User B has not received thanks");
@@ -555,4 +554,126 @@ public class HomePage extends BaseClass {
 
 	}
 
+	public void toVerifyThanksReceived() throws Exception {
+		// User B logging in to check the initial score count
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userBNumTD");
+		common.click("verifybutton", driver);
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			common.click("skip&conbutton", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			String initial_count = common.getText("userBScore", driver);
+			beforeReceiveCount = Integer.parseInt(initial_count);
+			System.out.println("This is initial count" + " " + beforeReceiveCount);
+			common.click("tapOnSettings", driver);
+			common.click("logOutBtn", driver);
+			common.click("logouConfirmAlert", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged out");
+			// Till here the initial count is stored and the app is closed
+		}
+
+		// User A logs in to send thanks to user B
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			System.out.println("1");
+			common.click("skip&conbutton", driver);
+			common.click("selUserContact", driver);
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			common.click("thankful", driver);
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			common.click("grateful", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
+
+		} else if (common.getWebElements("profPageTitle").size() == 1) {
+			System.out.println("2");
+			common.sendKeys("enterUserName", driver, "userANameTD");
+			common.click("myFaithTab", driver);
+			common.sendKeys("enterGodName", driver, "userAGodTD");
+			common.click("saveBtn", driver);
+			System.out.println("Save is clicked");
+			Thread.sleep(5000);
+			common.click("userTutorial", driver);
+			Thread.sleep(5000);
+			common.click("skip&conbutton", driver);
+			Thread.sleep(10000);
+			common.click("selGod", driver);
+			common.click("godTutSkip", driver);
+			common.tap("selUserContact", driver);
+			extentTest.log(LogStatus.INFO, "The user name is selected");
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			common.click("thankful", driver);
+			extentTest.log(LogStatus.INFO, "The user has selected tankful message");
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
+
+		} else {
+			System.out.println("3");
+			common.tap("selUserContact", driver);
+			extentTest.log(LogStatus.INFO, "The user B is selected");
+			common.click("indebtThanks", driver);
+			common.click("grateful", driver);
+			common.click("thankful", driver);
+			extentTest.log(LogStatus.INFO, "The user A has selected tankful message");
+			common.click("sayThanksbtn", driver);
+			common.click("clicktosendThanks", driver);
+			extentTest.log(LogStatus.INFO, "Thanks has been sent");
+			common.click("scoreClick", driver);
+			common.click("givenThanksTab", driver);
+			common.getText("thanksfullVerify", driver);
+			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
+			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
+			common.click("tapOnSettings", driver);
+			common.click("logOutBtn", driver);
+			common.click("logouConfirmAlert", driver);
+			extentTest.log(LogStatus.INFO, "User A has logged out");
+			// Till here the User A has sent thanks to user B and the App is
+			// closed
+		}
+
+		// User B again logs in to check the received thanks from User A
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userBNumTD");
+		common.click("verifybutton", driver);
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		if (common.getWebElements("importButton").size() == 1) {
+			common.click("skip&conbutton", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			System.out.println("This is initial count when B logs in again" + " " + beforeReceiveCount);
+			String After = common.getText("userBScore", driver);
+			afterReceieveCount = Integer.parseInt(After);
+			System.out.println("after count" + afterReceieveCount);
+			// Assert.assertEquals(beforeReceiveCount, final_result);
+			if (afterReceieveCount == beforeReceiveCount + 1) {
+				Assert.assertTrue(true);
+				extentTest.log(LogStatus.PASS, "User B has received Thanks from User A");
+			} else {
+				Assert.assertTrue(false);
+			}
+
+		}
+
+	}
 }

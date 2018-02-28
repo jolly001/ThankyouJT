@@ -2,13 +2,14 @@ package com.ThankYouProject.testCases;
 
 import java.io.IOException;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class ToVerifyTermsOfServiceAndPrivacyPolicy extends BaseClass {
+public class ToVerifyReceivedMessage extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
@@ -18,8 +19,13 @@ public class ToVerifyTermsOfServiceAndPrivacyPolicy extends BaseClass {
 	}
 
 	@Test
-	public void verifyTheTOSandPP() throws Exception {
-		obj.welcomeScreen();
+	public void testUserIsAbleToEditProfile() throws Exception {
+		obj.ToVerifyTheSenderMessagesCount();
 	}
 
+	@AfterTest
+	public void killApp() {
+		driver.closeApp();
+
+	}
 }

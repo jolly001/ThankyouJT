@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class ToVerifyTheSplashScreen extends BaseClass {
+public class Testid_005_Install extends BaseClass {
 	HomePage obj;
 
 	@BeforeTest
@@ -19,12 +19,14 @@ public class ToVerifyTheSplashScreen extends BaseClass {
 	}
 
 	@Test
-	public void splashScreenVerify() {
-		obj.spalshScreen();
-
+	public void testid_005_Install() throws Exception {
+		extentTest.setDescription("To verify the Terms and conditions and provacy policy");
+		obj.verifyTOAndPP();
 	}
+	
 	@AfterTest
 	public void killApp(){
 		driver.closeApp();
 	}
+
 }

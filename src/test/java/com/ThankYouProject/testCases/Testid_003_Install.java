@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
-public class ToTestUserIsAbleToRegister extends BaseClass {
+public class Testid_003_Install extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
@@ -19,16 +20,15 @@ public class ToTestUserIsAbleToRegister extends BaseClass {
 	}
 
 	@Test
-	public void testUserRegisteration() throws Exception {
-		System.out.println("User reg");
-		obj.userRegisteration();
-		
+	public void testid_003_Install() throws Exception {
+		extentTest.setDescription("To verify the splash screen");
+		obj.splashScreen();
+		extentTest.log(LogStatus.PASS, "User is on splash screen");
+
 	}
 
 	@AfterTest
 	public void killApp() {
 		driver.closeApp();
-
 	}
-
 }

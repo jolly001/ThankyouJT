@@ -9,10 +9,9 @@ import org.testng.annotations.Test;
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class ToVerifyTheSentThanksCount extends BaseClass {
-	
+public class TC_001_Registeration extends BaseClass {
 	HomePage obj;
-	
+
 	@BeforeTest
 	public void setup() throws IOException {
 		initialization();
@@ -20,8 +19,11 @@ public class ToVerifyTheSentThanksCount extends BaseClass {
 	}
 
 	@Test
-	public void testUserIsAbleToEditProfile() throws Exception {
-		obj.ToVerifyTheSenderMessagesCount();
+	public void TC_001_Registeration() throws Exception {
+		extentTest.setDescription("To test if the user is able to register successfully and lands on to the home page");
+		System.out.println("User reg");
+		obj.userRegisteration();
+		
 	}
 
 	@AfterTest

@@ -141,6 +141,10 @@ public class CommonFunctions extends BaseClass {
 		Assert.assertEquals(getTestData(actual), expected);
 
 	}
+	
+	public void assertionMethod(String expected,AndroidDriver<AndroidElement> driver, String actual){
+		Assert.assertEquals(getTestData(actual), expected);
+	}
 
 	public void checkIfElementIsEnabled(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
 		if (getWebElement(locator).isEnabled()) {
