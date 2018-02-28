@@ -96,9 +96,13 @@ public class BaseClass {
 
 	@BeforeMethod()
 	public void beforeMethod(Method result) {
-		extentTest = extent.startTest(result.getName());
+		//extentTest = extent.startTest(result.getName());
 
 		//extentTest = extent.startTest((this.getClass().getSimpleName() + "::" + result.getName()), result.getName());
+		extentTest = extent.startTest(result.getName());
+		//extentTest = extent.startTest(result.getClass().getName());
+		
+		//extentTest = extent.startTest((this.getClass().getSimpleName()), result.getName());
 		extentTest.log(LogStatus.INFO, result.getName() + " test Started");
 
 		extentTest.assignAuthor("Nature9");

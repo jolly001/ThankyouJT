@@ -8,8 +8,10 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
-public class UserBloggedInToCheckInitialMessageCount extends BaseClass {
+public class ToVerifyWelcomeScreen extends BaseClass {
+	
 	HomePage obj;
 
 	@BeforeTest
@@ -19,8 +21,11 @@ public class UserBloggedInToCheckInitialMessageCount extends BaseClass {
 	}
 
 	@Test
-	public void userBloginToCheckInitialThankscount() throws Exception {
-		obj.userBReceivesThankfulMessage();
+	public void splashScreenVerify() throws Exception {
+		extentTest.setDescription("To verify that user is on Welcome screen");
+		obj.welcomeScreen();
+		extentTest.log(LogStatus.PASS, "User is on Welcome screen");
+
 	}
 
 	@AfterTest

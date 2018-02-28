@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class UserBloggedInAgainToCheckThanks extends BaseClass {
-
+public class ToVerifyReceiverThanksCount extends BaseClass {
 	HomePage obj;
 
 	@BeforeTest
@@ -20,12 +19,14 @@ public class UserBloggedInAgainToCheckThanks extends BaseClass {
 	}
 
 	@Test
-	public void userBLoginAgainToCheckThanksReceived() throws Exception {
-		obj.userBlogin();
+	public void testUserIsAbleToEditProfile() throws Exception {
+		obj.toVerifyThanksReceived();
 	}
 
 	@AfterTest
 	public void killApp() {
 		driver.closeApp();
+
 	}
+
 }
