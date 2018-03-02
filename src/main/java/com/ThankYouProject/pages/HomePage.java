@@ -38,9 +38,9 @@ public class HomePage extends BaseClass {
 		common.assertionMethod(activityName, driver, "welcomeScreenTD");
 
 	}
-	
-	public void splashScreen(){
-		String activityName= driver.currentActivity();
+
+	public void splashScreen() {
+		String activityName = driver.currentActivity();
 		common.assertionMethod(activityName, driver, "spashScreenTD");
 	}
 
@@ -65,9 +65,35 @@ public class HomePage extends BaseClass {
 																	// verify
 																	// the
 																	// user
-																	// is on
+																	// is again
+																	// on
 																	// home
 
+	}
+	
+	public void minimizingApplication() throws Exception{
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "numberTD");
+		common.click("verifybutton", driver);
+
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		common.click("skip&conbutton", driver);
+	    common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
+	 extentTest.log(LogStatus.PASS, "User is on the home page");
+	
+	 
+	 driver.runAppInBackground(4);
+	 String actualActivity=driver.currentActivity();
+	 common.assertionMethod(actualActivity, driver, "homeScreenActivityTD");
+	 extentTest.log(LogStatus.INFO, "Appication is now minimized");
+	 common.click("skip&conbutton", driver);
+	 driver.runAppInBackground(4);
+	 common.click("skip&conbutton", driver);
+	 common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
+	extentTest.log(LogStatus.PASS, "User has switched back to application Homepage");
 	}
 
 	public void userRegisteration() throws Exception {
@@ -76,20 +102,21 @@ public class HomePage extends BaseClass {
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
+		extentTest.log(LogStatus.PASS, "User is able to select the country code");
+		
+		// User selects the country code
 		common.sendKeys("enterNum", driver, "123456");
 		common.click("verifybutton", driver);
-		extentTest.log(LogStatus.INFO, "Clicked on verify button");
+		extentTest.log(LogStatus.PASS, "Clicked on verify button by entering number less than 7 digits");
+		//User is not able to register with digits less than 6
 		Thread.sleep(1000);
-		// for (int i = 0; i < 5; i++) {
-		// common.click("allowPopup", driver);
-		// }
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
-		common.randomnumgen();
+		common.randomnumgen(); //generates 7 digis number
 		common.click("verifybutton", driver);
-		// common.applywait();
 		common.sendKeys("enterCode", driver, "enterOtpTD");
-		// common.applywait();
+		extentTest.log(LogStatus.PASS, "User is able to register with digits between 7-13");
+		//User is able to register with digits between 7-13
 		common.sendKeys("enterUserName", driver, "newUserTD");
 		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
 		common.click("myFaithTab", driver);
@@ -101,6 +128,9 @@ public class HomePage extends BaseClass {
 		// common.applywait();
 		common.click("skip&conbutton", driver);
 		extentTest.log(LogStatus.INFO, "user has skipped user tutorial");
+		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
+		extentTest.log(LogStatus.PASS, "Verified that user is on the home page");
+		// User is on the home page
 
 	}
 
