@@ -70,30 +70,29 @@ public class HomePage extends BaseClass {
 																	// home
 
 	}
-	
-	public void minimizingApplication() throws Exception{
+
+	public void minimizingApplication() throws Exception {
 		common.click(("agreeBttn"), driver);
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.sendKeys("enterNum", driver, "numberTD");
+		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
 
 		common.sendKeys("enterCode", driver, "enterOtpTD");
-		common.click("skip&conbutton", driver);
-	    common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
-	 extentTest.log(LogStatus.PASS, "User is on the home page");
-	
-	 
-	 driver.runAppInBackground(4);
-	 String actualActivity=driver.currentActivity();
-	 common.assertionMethod(actualActivity, driver, "homeScreenActivityTD");
-	 extentTest.log(LogStatus.INFO, "Appication is now minimized");
-	 common.click("skip&conbutton", driver);
-	 driver.runAppInBackground(4);
-	 common.click("skip&conbutton", driver);
-	 common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
-	extentTest.log(LogStatus.PASS, "User has switched back to application Homepage");
+		// common.click("skip&conbutton", driver);
+		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
+		extentTest.log(LogStatus.PASS, "User is on the home page");
+
+		driver.runAppInBackground(4); //
+		String actualActivity = driver.currentActivity();
+		common.assertionMethod(actualActivity, driver, "homeScreenActivityTD");
+		extentTest.log(LogStatus.INFO, "Appication is now minimized");
+		// common.click("skip&conbutton", driver);
+		driver.runAppInBackground(4);
+		//common.click("skip&conbutton", driver);
+		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
+		extentTest.log(LogStatus.PASS, "User has switched back to application Homepage");
 	}
 
 	public void userRegisteration() throws Exception {
@@ -103,20 +102,20 @@ public class HomePage extends BaseClass {
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
 		extentTest.log(LogStatus.PASS, "User is able to select the country code");
-		
+
 		// User selects the country code
 		common.sendKeys("enterNum", driver, "123456");
 		common.click("verifybutton", driver);
 		extentTest.log(LogStatus.PASS, "Clicked on verify button by entering number less than 7 digits");
-		//User is not able to register with digits less than 6
+		// User is not able to register with digits less than 6
 		Thread.sleep(1000);
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
-		common.randomnumgen(); //generates 7 digis number
+		common.randomnumgen(); // generates 7 digis number
 		common.click("verifybutton", driver);
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		extentTest.log(LogStatus.PASS, "User is able to register with digits between 7-13");
-		//User is able to register with digits between 7-13
+		// User is able to register with digits between 7-13
 		common.sendKeys("enterUserName", driver, "newUserTD");
 		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
 		common.click("myFaithTab", driver);
