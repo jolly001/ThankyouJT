@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -142,8 +143,13 @@ public class CommonFunctions extends BaseClass {
 
 	}
 	
-	public void assertionMethod(String expected,AndroidDriver<AndroidElement> driver, String actual){
-		Assert.assertEquals(getTestData(actual), expected);
+	public void assertionMethod(String actual,AndroidDriver<AndroidElement> driver, String expected){
+		//Assert.assertEquals(getTestData(actual), expected);
+		String message="|Actual Text: "+actual +"| |Expected Text: "+getTestData(expected)+"|";
+        String html="<span style='color:blue;'>"+ message+" </span>";
+        extentTest.log(LogStatus.INFO, html);
+		Assert.assertEquals(actual, getTestData(expected));
+	
 	}
 
 	public void checkIfElementIsEnabled(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
