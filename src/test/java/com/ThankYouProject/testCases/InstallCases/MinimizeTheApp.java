@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases;
+package com.ThankYouProject.testCases.InstallCases;
 
 import java.io.IOException;
 
@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
-public class TC_001_Registeration extends BaseClass {
+public class MinimizeTheApp extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
@@ -19,17 +20,14 @@ public class TC_001_Registeration extends BaseClass {
 	}
 
 	@Test
-	public void TC_001_Registeration() throws Exception {
-		extentTest.setDescription("To test if the user is able to register successfully and lands on to the home page");
-		System.out.println("User reg");
-		obj.userRegisteration();
-		
+	public void minimizeTheApp() throws Exception {
+		extentTest.setDescription("To verify Able to Minimize the screen and switch back");
+		obj.minimizingApplication();
+
 	}
 
 	@AfterTest
 	public void killApp() {
 		driver.closeApp();
-
 	}
-
 }

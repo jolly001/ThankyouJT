@@ -21,7 +21,6 @@ import io.appium.java_client.android.AndroidElement;
 public class CommonFunctions extends BaseClass {
 
 	public void click(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
-
 		// For Clicking on Element
 
 		getWebElement(locator).click();

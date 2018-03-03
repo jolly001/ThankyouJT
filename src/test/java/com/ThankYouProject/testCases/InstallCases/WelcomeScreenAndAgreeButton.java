@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases;
+package com.ThankYouProject.testCases.InstallCases;
 
 import java.io.IOException;
 
@@ -10,7 +10,8 @@ import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class Testid_003_Install extends BaseClass{
+public class WelcomeScreenAndAgreeButton extends BaseClass {
+	
 	HomePage obj;
 
 	@BeforeTest
@@ -20,10 +21,11 @@ public class Testid_003_Install extends BaseClass{
 	}
 
 	@Test
-	public void testid_003_Install() throws Exception {
-		extentTest.setDescription("To verify the splash screen");
-		obj.splashScreen();
-		extentTest.log(LogStatus.PASS, "User is on splash screen");
+	public void welcomeScreenAndAgreeButton() throws Exception {
+		extentTest.setDescription("To verify that user is on Welcome screen");
+		obj.welcomeScreen();
+		extentTest.log(LogStatus.PASS, "User is on Welcome screen");
+		
 
 	}
 
@@ -31,4 +33,5 @@ public class Testid_003_Install extends BaseClass{
 	public void killApp() {
 		driver.closeApp();
 	}
+
 }
