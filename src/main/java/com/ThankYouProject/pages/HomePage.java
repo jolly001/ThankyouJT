@@ -17,6 +17,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.android.AndroidKeyCode;
 
 public class HomePage extends BaseClass {
 	AndroidDriver<AndroidElement> driver;
@@ -31,11 +32,13 @@ public class HomePage extends BaseClass {
 		this.driver = driver;
 	}
 
-	public void welcomeScreen() {
+	public void welcomeScreen() throws Exception {
 
-		String activityName = driver.currentActivity();
-
-		common.assertionMethod(activityName, driver, "welcomeScreenTD");
+		common.click("agreeBttn", driver);
+		extentTest.log(LogStatus.PASS, "User is able to click on Agree and Continue button");
+		String s= common.getText("enterNumScreen", driver);
+		common.assertionMethod(s, driver, "enerNumPageTitle");
+		extentTest.log(LogStatus.PASS, "User is on Enter Number Screen");
 
 	}
 
@@ -80,7 +83,6 @@ public class HomePage extends BaseClass {
 		common.click("verifybutton", driver);
 
 		common.sendKeys("enterCode", driver, "enterOtpTD");
-		// common.click("skip&conbutton", driver);
 		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
 		extentTest.log(LogStatus.PASS, "User is on the home page");
 
@@ -88,9 +90,7 @@ public class HomePage extends BaseClass {
 		String actualActivity = driver.currentActivity();
 		common.assertionMethod(actualActivity, driver, "homeScreenActivityTD");
 		extentTest.log(LogStatus.INFO, "Appication is now minimized");
-		// common.click("skip&conbutton", driver);
 		driver.runAppInBackground(4);
-		//common.click("skip&conbutton", driver);
 		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
 		extentTest.log(LogStatus.PASS, "User has switched back to application Homepage");
 	}
@@ -100,18 +100,26 @@ public class HomePage extends BaseClass {
 		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		String actualCode = common.getText("countryCode", driver);
 		common.click("india", driver);
 		extentTest.log(LogStatus.PASS, "User is able to select the country code");
 
 		// User selects the country code
+		common.sendKeys("enterNum", driver, "12345633333333");
+		String x = common.getText("enterNum", driver);
+		common.assertionMethod(x, driver, "enterNumPlaceHolderTD");
+		extentTest.log(LogStatus.INFO, "User is not able to enter number more than 13");
 		common.sendKeys("enterNum", driver, "123456");
+		String y = common.getText("enterNum", driver);
+		common.assertionMethod(y, driver, "enterNumPlaceHolderTD");
+		extentTest.log(LogStatus.INFO, "User is not able to enter number less than 7");
 		common.click("verifybutton", driver);
 		extentTest.log(LogStatus.PASS, "Clicked on verify button by entering number less than 7 digits");
 		// User is not able to register with digits less than 6
 		Thread.sleep(1000);
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
-		common.randomnumgen(); // generates 7 digis number
+		common.randomnumgen(); // generates 7 digits number
 		common.click("verifybutton", driver);
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		extentTest.log(LogStatus.PASS, "User is able to register with digits between 7-13");
@@ -130,6 +138,20 @@ public class HomePage extends BaseClass {
 		common.verifyTitle("verifyHomePage", driver, "homePageTitleTD");
 		extentTest.log(LogStatus.PASS, "Verified that user is on the home page");
 		// User is on the home page
+		common.click("userProfPic", driver);
+		common.verifyTitle("profPageTitle", driver, "profileTitleTD");
+		common.checkIfElementIsEnabled("verifyProftabisEbabled", driver);
+		extentTest.log(LogStatus.INFO, "Verified that user is profile page page");
+		String code = common.getText("countryCodeInProfile", driver);
+		String c = code.substring(0, 3);// extracts the first 3 characters of
+										// country code
+		Assert.assertEquals(actualCode, c); // comparing the country code with
+											// the actual code
+		extentTest.log(LogStatus.PASS, "The country code is verified");
+		common.click("backBtnProfile", driver);
+		// To Test that user is not able to go back after coming to home page
+		driver.pressKeyCode(AndroidKeyCode.BACK);
+		extentTest.log(LogStatus.PASS, "user is not able to go back after coming to home page");
 
 	}
 
@@ -188,7 +210,7 @@ public class HomePage extends BaseClass {
 		common.click("userProfPic", driver);
 		common.verifyTitle("profPageTitle", driver, "profileTitleTD");
 		common.checkIfElementIsEnabled("verifyProftabisEbabled", driver);
-		extentTest.log(LogStatus.INFO, "Verified that user is Home page");
+		extentTest.log(LogStatus.INFO, "Verified that user is profile page page");
 		common.sendKeys("enterUserName", driver, "userEditNameTD");
 		common.checkIfElementIsDisabled("editUserNumber", driver);
 		common.click("myFaithTab", driver);

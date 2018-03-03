@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases;
+package com.ThankYouProject.testCases.InstallCases;
 
 import java.io.IOException;
 
@@ -8,10 +8,8 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
-import com.relevantcodes.extentreports.LogStatus;
 
-public class ToVerifyWelcomeScreen extends BaseClass {
-	
+public class ToTestTermsAndConditionsAndPrivacyPolicy extends BaseClass {
 	HomePage obj;
 
 	@BeforeTest
@@ -21,15 +19,13 @@ public class ToVerifyWelcomeScreen extends BaseClass {
 	}
 
 	@Test
-	public void splashScreenVerify() throws Exception {
-		extentTest.setDescription("To verify that user is on Welcome screen");
-		obj.welcomeScreen();
-		extentTest.log(LogStatus.PASS, "User is on Welcome screen");
-
+	public void testid_005_Install() throws Exception {
+		extentTest.setDescription("To verify the Terms and conditions and provacy policy");
+		obj.verifyTOAndPP();
 	}
-
+	
 	@AfterTest
-	public void killApp() {
+	public void killApp(){
 		driver.closeApp();
 	}
 
