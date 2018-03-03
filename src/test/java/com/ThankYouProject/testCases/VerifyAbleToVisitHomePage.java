@@ -30,5 +30,6 @@ public class VerifyAbleToVisitHomePage extends BaseClass {
 	 @AfterTest
 	 public void killApp() {
 	 driver.closeApp();
+	 
 	 }
 }
