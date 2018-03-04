@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases;
+package com.ThankYouProject.testCases.RegisterationCases;
 
 import java.io.IOException;
 
