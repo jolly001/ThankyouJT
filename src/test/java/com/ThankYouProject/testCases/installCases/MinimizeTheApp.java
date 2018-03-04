@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases.InstallCases;
+package com.ThankYouProject.testCases.installCases;
 
 import java.io.IOException;
 
@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
-public class ToTestTermsAndConditionsAndPrivacyPolicy extends BaseClass {
+public class MinimizeTheApp extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
@@ -19,14 +20,14 @@ public class ToTestTermsAndConditionsAndPrivacyPolicy extends BaseClass {
 	}
 
 	@Test
-	public void testid_005_Install() throws Exception {
-		extentTest.setDescription("To verify the Terms and conditions and provacy policy");
-		obj.verifyTOAndPP();
-	}
-	
-	@AfterTest
-	public void killApp(){
-		driver.closeApp();
+	public void minimizeTheApp() throws Exception {
+		extentTest.setDescription("To verify Able to Minimize the screen and switch back");
+		obj.minimizingApplication();
+
 	}
 
+	@AfterTest
+	public void killApp() {
+		driver.closeApp();
+	}
 }

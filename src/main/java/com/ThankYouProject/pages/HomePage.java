@@ -453,6 +453,38 @@ public class HomePage extends BaseClass {
 
 		}
 	}
+	
+
+	public void getting59SecondTimeAfterClickingOnResendButton() throws Exception {
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		extentTest.log(LogStatus.INFO, "User has selected the country");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		extentTest.log(LogStatus.INFO, "Verify button is clicked");
+		
+		Thread.sleep(59000);
+		common.click("resendCodeBttn", driver);
+		extentTest.log(LogStatus.INFO, "Resend button is clicked");
+		String resendTimeCounter=common.getText("resendTimeCounter", driver);
+		resendTimeCounter=resendTimeCounter.trim();
+		
+		//System.out.println(resendTimeCounter.equalsIgnoreCase("0:59s"));
+	
+	    if(resendTimeCounter.equalsIgnoreCase("0:59s")|| resendTimeCounter.equalsIgnoreCase("0:58s"))
+		{
+		extentTest.log(LogStatus.PASS, "Getting 59Second Time After Clicking On ResendButton");
+		Assert.assertTrue(true);
+		}
+		else
+		{
+			Assert.assertTrue(false);
+		}
+		
+	}
+
 
 	public void ToVerifyTheSenderMessagesCount() throws Exception {
 
