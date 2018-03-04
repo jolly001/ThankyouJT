@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases.InstallCases;
+package com.ThankYouProject.testCases.profile;
 
 import java.io.IOException;
 
@@ -7,31 +7,28 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
+import com.ThankYouProject.pages.Profile;
 import com.ThankYouProject.testBase.BaseClass;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class WelcomeScreenAndAgreeButton extends BaseClass {
-	
-	HomePage obj;
+public class TC_M14_Profile extends BaseClass{
+	Profile obj;
 
 	@BeforeTest
 	public void setup() throws IOException {
 		initialization();
-		obj = new HomePage(driver);
+		obj = new Profile(driver);
 	}
 
 	@Test
-	public void welcomeScreenAndAgreeButton() throws Exception {
-		extentTest.setDescription("To verify that user is on Welcome screen");
-		obj.welcomeScreen();
-		extentTest.log(LogStatus.PASS, "User is on Welcome screen");
-		
+	public void TC_M13_Profile() throws Exception {
+		extentTest.setDescription("Verify that User is able to put profile photo on Profile page by Clicking Picture from Device");
+		obj.profilePictureAttach();
 
 	}
 
 	@AfterTest
 	public void killApp() {
-		driver.closeApp();
+		//driver.closeApp();
 	}
-
 }

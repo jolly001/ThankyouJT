@@ -1,11 +1,21 @@
 package com.ThankYouProject.utility;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -192,6 +202,70 @@ public class CommonFunctions extends BaseClass {
 		TouchAction action = new TouchAction(driver);
 		return action.press(getWebElement(locator)).moveTo(getWebElement(locator)).release().perform();
 
+	}
+	
+	
+	public File getSpecificScreenshot(AndroidDriver<AndroidElement> driver,WebElement element,String screenshotName) throws IOException
+	{
+		
+		// Get entire page screenshot
+		File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		BufferedImage  fullImg = ImageIO.read(screenshot);
+
+		
+		// Get the location of element on the page
+		Point point = element.getLocation();
+
+		// Get width and height of the element
+		int eleWidth = element.getSize().getWidth();
+		int eleHeight = element.getSize().getHeight();
+		
+		// Crop the entire page screenshot to get only element screenshot
+		BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
+		    eleWidth, eleHeight);
+		ImageIO.write(eleScreenshot, "png", screenshot);
+		
+		// Copy the element screenshot to disk
+		File screenshotLocation = new File(System.getProperty("user.dir")+"/screenshots/"+screenshotName+".png");
+		FileUtils.copyFile(screenshot, screenshotLocation);
+		return  screenshotLocation;
+			
+		
+	}
+	
+	public float compareImage(File fileA, File fileB) {
+
+	    float percentage = 0;
+	    try {
+	        // take buffer data from both image files //
+	        BufferedImage biA = ImageIO.read(fileA);
+	        DataBuffer dbA = biA.getData().getDataBuffer();
+	        int sizeA = dbA.getSize();
+	        BufferedImage biB = ImageIO.read(fileB);
+	        DataBuffer dbB = biB.getData().getDataBuffer();
+	        int sizeB = dbB.getSize();
+	        int count = 0;
+	        // compare data-buffer objects //
+	        if (sizeA == sizeB) {
+
+	            for (int i = 0; i < sizeA; i++) {
+
+	                if (dbA.getElem(i) == dbB.getElem(i)) {
+	                    count = count + 1;
+	                }
+
+	            }
+	            percentage = (count * 100) / sizeA;
+	        } else {
+	            System.out.println("Both the images are not of same size");
+	            System.out.println(percentage);
+	        }
+
+	    } catch (Exception e) {
+	        System.out.println("Failed to compare image files ...");
+	    }
+	    System.out.println(percentage);
+	    return percentage;
 	}
 
 	public void horizontalSwipe() {

@@ -1,15 +1,17 @@
-package com.ThankYouProject.testCases;
+package com.ThankYouProject.testCases.registerationCases;
 
 import java.io.IOException;
 
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
 
-public class TotestUserIsAbleToEditProfile extends BaseClass {
+public class VerifyAbleToVisitHomePage extends BaseClass {
+
 	HomePage obj;
 
 	@BeforeTest
@@ -19,15 +21,15 @@ public class TotestUserIsAbleToEditProfile extends BaseClass {
 	}
 
 	@Test
-	public void testUserIsAbleToEditProfile() throws Exception {
-		obj.userIsAbleToEditProfile();
+	public void verifyAbleToVisitHomePage() throws Exception {
+
+		obj.visitHomePage();
 
 	}
 
-	@AfterTest
-	public void killApp() {
-		driver.closeApp();
-
-	}
-
+	 @AfterTest
+	 public void killApp() {
+	 driver.closeApp();
+	 
+	 }
 }

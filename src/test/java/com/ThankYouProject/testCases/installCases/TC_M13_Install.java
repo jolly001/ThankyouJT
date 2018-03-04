@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases.RegisterationCases;
+package com.ThankYouProject.testCases.installCases;
 
 import java.io.IOException;
 
@@ -8,8 +8,9 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
+import com.relevantcodes.extentreports.LogStatus;
 
-public class TC_001_Registeration extends BaseClass {
+public class TC_M13_Install extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
@@ -19,17 +20,14 @@ public class TC_001_Registeration extends BaseClass {
 	}
 
 	@Test
-	public void TC_001_Registeration() throws Exception {
-		extentTest.setDescription("To test if the user is able to register successfully and lands on to the home page");
-		System.out.println("User reg");
-		obj.userRegisteration();
-		
+	public void TC_M13_Install() throws Exception {
+		extentTest.setDescription("User is able to get the 59 Sec time when the user press the Resend code button.");
+		obj.getting59SecondTimeAfterClickingOnResendButton();
+
 	}
 
 	@AfterTest
 	public void killApp() {
 		driver.closeApp();
-
 	}
-
 }
