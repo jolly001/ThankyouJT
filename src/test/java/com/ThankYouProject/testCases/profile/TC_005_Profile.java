@@ -6,12 +6,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.pages.Profile;
 import com.ThankYouProject.testBase.BaseClass;
-import com.relevantcodes.extentreports.LogStatus;
 
-public class TC_M14_Profile extends BaseClass{
+public class TC_005_Profile extends BaseClass {
 	Profile obj;
 
 	@BeforeTest
@@ -21,14 +19,13 @@ public class TC_M14_Profile extends BaseClass{
 	}
 
 	@Test
-	public void TC_M13_Profile() throws Exception {
-		extentTest.setDescription("Verify that User is able to put profile photo on Profile page by Clicking Picture from Device");
-		obj.profilePictureAttach();
-
+	public void uploadPicFromGallery() throws Exception {
+		obj.uploadPicFromGallery();
 	}
 
 	@AfterTest
 	public void killApp() {
-		//driver.closeApp();
+		driver.closeApp();
 	}
+
 }
