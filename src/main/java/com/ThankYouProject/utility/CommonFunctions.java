@@ -179,6 +179,19 @@ public class CommonFunctions extends BaseClass {
 		String text = getWebElement(locator).getText();
 		return text;
 	}
+	
+	public void getSize(String locator, AndroidDriver<AndroidElement> driver) throws Exception{
+		int ele=getLocators(loc.getProperty(locator)).size();
+		if(ele==1){
+			Assert.assertTrue(true);
+			extentTest.log(LogStatus.PASS, "The element is visible");
+		}
+		else
+		{
+			Assert.assertTrue(false);
+		extentTest.log(LogStatus.PASS,"The element is not visible");
+		}
+	}
 
 	public String randomnumgen() {
 		Random rand = new Random();

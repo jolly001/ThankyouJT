@@ -36,7 +36,7 @@ public class HomePage extends BaseClass {
 
 		common.click("agreeBttn", driver);
 		extentTest.log(LogStatus.PASS, "User is able to click on Agree and Continue button");
-		String s= common.getText("enterNumScreen", driver);
+		String s = common.getText("enterNumScreen", driver);
 		common.assertionMethod(s, driver, "enerNumPageTitle");
 		extentTest.log(LogStatus.PASS, "User is on Enter Number Screen");
 
@@ -163,14 +163,7 @@ public class HomePage extends BaseClass {
 		common.click("india", driver);
 		common.sendKeys("enterNum", driver, "numberTD");
 		common.click("verifybutton", driver);
-
-		// for (int i = 0; i < 5; i++) {
-		// common.click("allowPopup", driver);
-		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
-		// common.applywait();
-		// if the user is a new user
-
 		if (common.getWebElements("profPageTitle").size() == 1) {
 			extentTest.log(LogStatus.INFO, "Verified that this user is a new user");
 			common.sendKeys("enterUserName", driver, "userANameTD");
@@ -453,7 +446,6 @@ public class HomePage extends BaseClass {
 
 		}
 	}
-	
 
 	public void getting59SecondTimeAfterClickingOnResendButton() throws Exception {
 		common.click(("agreeBttn"), driver);
@@ -464,27 +456,70 @@ public class HomePage extends BaseClass {
 		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
 		extentTest.log(LogStatus.INFO, "Verify button is clicked");
-		
+
 		Thread.sleep(59000);
 		common.click("resendCodeBttn", driver);
 		extentTest.log(LogStatus.INFO, "Resend button is clicked");
-		String resendTimeCounter=common.getText("resendTimeCounter", driver);
-		resendTimeCounter=resendTimeCounter.trim();
-		
-		//System.out.println(resendTimeCounter.equalsIgnoreCase("0:59s"));
-	
-	    if(resendTimeCounter.equalsIgnoreCase("0:59s")|| resendTimeCounter.equalsIgnoreCase("0:58s"))
-		{
-		extentTest.log(LogStatus.PASS, "Getting 59Second Time After Clicking On ResendButton");
-		Assert.assertTrue(true);
-		}
-		else
-		{
+		String resendTimeCounter = common.getText("resendTimeCounter", driver);
+		resendTimeCounter = resendTimeCounter.trim();
+
+		// System.out.println(resendTimeCounter.equalsIgnoreCase("0:59s"));
+
+		if (resendTimeCounter.equalsIgnoreCase("0:59s") || resendTimeCounter.equalsIgnoreCase("0:58s")) {
+			extentTest.log(LogStatus.PASS, "Getting 59Second Time After Clicking On ResendButton");
+			Assert.assertTrue(true);
+		} else {
 			Assert.assertTrue(false);
 		}
-		
+
 	}
 
+	public void resendVerificationCode() throws Exception {
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		extentTest.log(LogStatus.INFO, "User has selected the country");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		extentTest.log(LogStatus.INFO, "Verify button is clicked");
+
+		Thread.sleep(59000);
+		common.click("resendCodeBttn", driver);
+		extentTest.log(LogStatus.PASS, "User is able to click on Resend Code");
+
+	}
+
+	public void userIsAbleToProceedAfterResendVerificationCode() throws Exception {
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		extentTest.log(LogStatus.INFO, "User has selected the country");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		extentTest.log(LogStatus.INFO, "Verify button is clicked");
+
+		Thread.sleep(59000); // wait for 60 seconds for resend link to appear
+		common.click("resendCodeBttn", driver);
+		extentTest.log(LogStatus.PASS, "User is able to click on Resend Code");
+		common.sendKeys("enterCode", driver, "enterOtpTD");
+		extentTest.log(LogStatus.PASS, "User is able to proceed after Resend the OTP");
+
+	}
+	
+	public void enterWrongOtp() throws Exception{
+		common.click(("agreeBttn"), driver);
+		common.click("selectCountry", driver);
+		common.sendKeys("enterCountryname", driver, "countryNameTD");
+		extentTest.log(LogStatus.INFO, "User has selected the country");
+		common.click("india", driver);
+		common.sendKeys("enterNum", driver, "userANumTD");
+		common.click("verifybutton", driver);
+		common.sendKeys("enterCode", driver, "enterWrongOTPTD");
+		common.getSize("wrongOtpToast", driver);
+		extentTest.log(LogStatus.INFO, "The error toast is visible");
+	}
 
 	public void ToVerifyTheSenderMessagesCount() throws Exception {
 
@@ -494,15 +529,12 @@ public class HomePage extends BaseClass {
 		common.click("india", driver);
 		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
-		// for (int i = 0; i < 5; i++) {
-		// common.click("allowPopup", driver);
-		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
 			common.click("scoreClick", driver);
 			common.click("givenThanksTab", driver);
-			String a = "11:22 PM"; /// last element in the list
+			String a = "11:22 PM"; // last element in the list
 			Boolean found_result = false;
 
 			while (!found_result) {
