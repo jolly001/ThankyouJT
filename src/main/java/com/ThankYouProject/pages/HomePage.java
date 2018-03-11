@@ -296,9 +296,6 @@ public class HomePage extends BaseClass {
 		common.click("india", driver);
 		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
-		// for (int i = 0; i < 5; i++) {
-		// common.click("allowPopup", driver);
-		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
@@ -507,8 +504,8 @@ public class HomePage extends BaseClass {
 		extentTest.log(LogStatus.PASS, "User is able to proceed after Resend the OTP");
 
 	}
-	
-	public void enterWrongOtp() throws Exception{
+
+	public void enterWrongOtp() throws Exception {
 		common.click(("agreeBttn"), driver);
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
@@ -685,6 +682,20 @@ public class HomePage extends BaseClass {
 			beforeReceiveCount = Integer.parseInt(initial_count);
 			System.out.println("This is initial count" + " " + beforeReceiveCount);
 			common.click("tapOnSettings", driver);
+			Thread.sleep(1000);
+			driver.swipe(514, 1094, 426, 587, 2000);
+			common.click("logOutBtn", driver);
+			common.click("logouConfirmAlert", driver);
+			extentTest.log(LogStatus.INFO, "User B has logged out");
+			// Till here the initial count is stored and the app is closed
+		} else {
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			String initial_count = common.getText("userBScore", driver);
+			beforeReceiveCount = Integer.parseInt(initial_count);
+			System.out.println("This is initial count" + " " + beforeReceiveCount);
+			common.click("tapOnSettings", driver);
+			Thread.sleep(1000);
+			driver.swipe(514, 1094, 426, 587, 2000);
 			common.click("logOutBtn", driver);
 			common.click("logouConfirmAlert", driver);
 			extentTest.log(LogStatus.INFO, "User B has logged out");
@@ -758,6 +769,8 @@ public class HomePage extends BaseClass {
 			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
 			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
 			common.click("tapOnSettings", driver);
+			Thread.sleep(1000);
+			driver.swipe(514, 1094, 426, 587, 2000);
 			common.click("logOutBtn", driver);
 			common.click("logouConfirmAlert", driver);
 			extentTest.log(LogStatus.INFO, "User A has logged out");
@@ -783,12 +796,65 @@ public class HomePage extends BaseClass {
 			// Assert.assertEquals(beforeReceiveCount, final_result);
 			if (afterReceieveCount == beforeReceiveCount + 1) {
 				Assert.assertTrue(true);
-				extentTest.log(LogStatus.PASS, "User B has received Thanks from User A");
+				extentTest.log(LogStatus.PASS, "User B is able to see previous thanks");
+				extentTest.log(LogStatus.PASS,
+						"User B has received Thanks from User A and thanks count is auto incremened");
 			} else {
 				Assert.assertTrue(false);
 			}
 
 		}
 
+		else {
+			extentTest.log(LogStatus.INFO, "User B has logged in");
+			System.out.println("This is initial count when B logs in again" + " " + beforeReceiveCount);
+			String After = common.getText("userBScore", driver);
+			afterReceieveCount = Integer.parseInt(After);
+			System.out.println("after count" + afterReceieveCount);
+			// Assert.assertEquals(beforeReceiveCount, final_result);
+			if (afterReceieveCount == beforeReceiveCount + 1) {
+				Assert.assertTrue(true);
+				extentTest.log(LogStatus.PASS, "User B is able to see previous thanks");
+				extentTest.log(LogStatus.PASS,
+						"User B has received Thanks from User A and thanks count is auto incremened");
+			} else {
+				Assert.assertTrue(false);
+			}
+		}
+
 	}
+
+	public void testTutorial() throws Exception {
+		common.methodForLogin();
+		common.getSize("ConfirmTutPage", driver);
+		extentTest.log(LogStatus.PASS, "user is on User tutorial page");
+		common.click("clickOnNextBtn", driver);
+		common.click("clickOnBckBtn", driver);
+		common.getSize("ConfirmTutPage", driver);
+		extentTest.log(LogStatus.PASS, "user is able to click on back button");
+		for (int i = 0; i <= 2; i++) {
+			common.click("clickOnNextBtn", driver);
+
+		}
+
+		Thread.sleep(3000);
+		common.getSize("skip&conbutton", driver);
+		extentTest.log(LogStatus.PASS, "user is able to see import contact popup");
+		common.click("skip&conbutton", driver);
+		common.checkIfElementIsEnabled("verifyHomePage", driver);
+		extentTest.log(LogStatus.PASS, "User is on home page after apping on skip and continue");
+		common.click("selGod", driver);
+		common.getSize("godTutPage", driver);
+		extentTest.log(LogStatus.PASS, "User is on God Tutorial page");
+		common.click("godTutSkip", driver);
+		extentTest.log(LogStatus.INFO, "God Tutorial is skipped");
+		common.checkIfElementIsEnabled("verifyHomePage", driver);
+		extentTest.log(LogStatus.PASS, "Afer tutorials user is on the home page");
+		common.click("selGod", driver);
+		common.click("indebtThanks", driver);
+		extentTest.log(LogStatus.PASS,
+				"since user is able to click on thanks after selecting the God it is true tha tutorial is coming for once");
+
+	}
+
 }
