@@ -1,4 +1,4 @@
-package com.ThankYouProject.testCases.installCases;
+package com.ThankYouProject.testCases.tutorialCases;
 
 import java.io.IOException;
 
@@ -8,11 +8,9 @@ import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
 import com.ThankYouProject.testBase.BaseClass;
-import com.relevantcodes.extentreports.LogStatus;
 
-public class ToTestSpalshScreen extends BaseClass{
+public class TC_015_Tutorial extends BaseClass {
 	HomePage obj;
-
 	@BeforeTest
 	public void setup() throws IOException {
 		initialization();
@@ -20,11 +18,8 @@ public class ToTestSpalshScreen extends BaseClass{
 	}
 
 	@Test
-	public void toTestSpalshScreen() throws Exception {
-		extentTest.setDescription("To verify the splash screen");
-	
-		obj.splashScreen();
-		extentTest.log(LogStatus.PASS, "User is on splash screen");
+	public void toTestTutorialFlow() throws Exception {
+		obj.testTutorial();
 
 	}
 
@@ -32,4 +27,5 @@ public class ToTestSpalshScreen extends BaseClass{
 	public void killApp() {
 		driver.closeApp();
 	}
+
 }

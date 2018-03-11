@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +26,7 @@ import org.testng.Assert;
 import com.ThankYouProject.testBase.BaseClass;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -151,14 +154,14 @@ public class CommonFunctions extends BaseClass {
 		Assert.assertEquals(getTestData(actual), expected);
 
 	}
-	
-	public void assertionMethod(String actual,AndroidDriver<AndroidElement> driver, String expected){
-		//Assert.assertEquals(getTestData(actual), expected);
-		String message="|Actual Text: "+actual +"| |Expected Text: "+getTestData(expected)+"|";
-        String html="<span style='color:blue;'>"+ message+" </span>";
-        extentTest.log(LogStatus.INFO, html);
+
+	public void assertionMethod(String actual, AndroidDriver<AndroidElement> driver, String expected) {
+		// Assert.assertEquals(getTestData(actual), expected);
+		String message = "|Actual Text: " + actual + "| |Expected Text: " + getTestData(expected) + "|";
+		String html = "<span style='color:blue;'>" + message + " </span>";
+		extentTest.log(LogStatus.INFO, html);
 		Assert.assertEquals(actual, getTestData(expected));
-	
+
 	}
 
 	public void checkIfElementIsEnabled(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
@@ -174,23 +177,26 @@ public class CommonFunctions extends BaseClass {
 		} else
 			Assert.assertTrue(false);
 	}
+	
+	public String timeStampGenerator(String message) throws Exception {
+		return message+ new SimpleDateFormat("MM-DD-YYYY-HH-MM-SS").format(new GregorianCalendar().getTime());
+	}
 
 	public String getText(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
 		String text = getWebElement(locator).getText();
 		return text;
 	}
-	
-	public void getSize(String locator, AndroidDriver<AndroidElement> driver) throws Exception{
-		int ele=getLocators(loc.getProperty(locator)).size();
-		if(ele==1){
+
+	public int getSize(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
+		int ele = getLocators(loc.getProperty(locator)).size();
+		if (ele == 1) {
 			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "The element is visible");
-		}
-		else
-		{
+		} else {
 			Assert.assertTrue(false);
-		extentTest.log(LogStatus.PASS,"The element is not visible");
+			extentTest.log(LogStatus.PASS, "The element is not visible");
 		}
+		return ele;
 	}
 
 	public String randomnumgen() {
@@ -201,6 +207,24 @@ public class CommonFunctions extends BaseClass {
 		driver.findElement(By.xpath("//android.widget.EditText[@text='Enter Number']")).sendKeys(numberAsString);
 		return numberAsString;
 
+	}
+	
+	public void methodForLogin() throws Exception{
+		//common method call to user login
+		click(("agreeBttn"), driver);
+		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
+		click("selectCountry", driver);
+		sendKeys("enterCountryname", driver, "countryNameTD");
+		click("india", driver);
+		randomnumgen();
+		click("verifybutton", driver);
+		sendKeys("enterCode", driver, "enterOtpTD");
+		sendKeys("enterUserName", driver, "newUserTD");
+		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
+		click("myFaithTab", driver);
+		sendKeys("enterGodName", driver, "newGodTD");
+		extentTest.log(LogStatus.INFO, "user is on God's profile and has entered God's name");
+		click("saveBtn", driver);
 	}
 
 	public TouchAction tap(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
@@ -216,69 +240,65 @@ public class CommonFunctions extends BaseClass {
 		return action.press(getWebElement(locator)).moveTo(getWebElement(locator)).release().perform();
 
 	}
-	
-	
-	public File getSpecificScreenshot(AndroidDriver<AndroidElement> driver,WebElement element,String screenshotName) throws IOException
-	{
-		
-		// Get entire page screenshot
-		File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		BufferedImage  fullImg = ImageIO.read(screenshot);
 
-		
+	public File getSpecificScreenshot(AndroidDriver<AndroidElement> driver, WebElement element, String screenshotName)
+			throws IOException {
+
+		// Get entire page screenshot
+		File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		BufferedImage fullImg = ImageIO.read(screenshot);
+
 		// Get the location of element on the page
 		Point point = element.getLocation();
 
 		// Get width and height of the element
 		int eleWidth = element.getSize().getWidth();
 		int eleHeight = element.getSize().getHeight();
-		
+
 		// Crop the entire page screenshot to get only element screenshot
-		BufferedImage eleScreenshot= fullImg.getSubimage(point.getX(), point.getY(),
-		    eleWidth, eleHeight);
+		BufferedImage eleScreenshot = fullImg.getSubimage(point.getX(), point.getY(), eleWidth, eleHeight);
 		ImageIO.write(eleScreenshot, "png", screenshot);
-		
+
 		// Copy the element screenshot to disk
-		File screenshotLocation = new File(System.getProperty("user.dir")+"/screenshots/"+screenshotName+".png");
+		File screenshotLocation = new File(System.getProperty("user.dir") + "/screenshots/" + screenshotName + ".png");
 		FileUtils.copyFile(screenshot, screenshotLocation);
-		return  screenshotLocation;
-			
-		
+		return screenshotLocation;
+
 	}
-	
+
 	public float compareImage(File fileA, File fileB) {
 
-	    float percentage = 0;
-	    try {
-	        // take buffer data from both image files //
-	        BufferedImage biA = ImageIO.read(fileA);
-	        DataBuffer dbA = biA.getData().getDataBuffer();
-	        int sizeA = dbA.getSize();
-	        BufferedImage biB = ImageIO.read(fileB);
-	        DataBuffer dbB = biB.getData().getDataBuffer();
-	        int sizeB = dbB.getSize();
-	        int count = 0;
-	        // compare data-buffer objects //
-	        if (sizeA == sizeB) {
+		float percentage = 0;
+		try {
+			// take buffer data from both image files //
+			BufferedImage biA = ImageIO.read(fileA);
+			DataBuffer dbA = biA.getData().getDataBuffer();
+			int sizeA = dbA.getSize();
+			BufferedImage biB = ImageIO.read(fileB);
+			DataBuffer dbB = biB.getData().getDataBuffer();
+			int sizeB = dbB.getSize();
+			int count = 0;
+			// compare data-buffer objects //
+			if (sizeA == sizeB) {
 
-	            for (int i = 0; i < sizeA; i++) {
+				for (int i = 0; i < sizeA; i++) {
 
-	                if (dbA.getElem(i) == dbB.getElem(i)) {
-	                    count = count + 1;
-	                }
+					if (dbA.getElem(i) == dbB.getElem(i)) {
+						count = count + 1;
+					}
 
-	            }
-	            percentage = (count * 100) / sizeA;
-	        } else {
-	            System.out.println("Both the images are not of same size");
-	            System.out.println(percentage);
-	        }
+				}
+				percentage = (count * 100) / sizeA;
+			} else {
+				System.out.println("Both the images are not of same size");
+				System.out.println(percentage);
+			}
 
-	    } catch (Exception e) {
-	        System.out.println("Failed to compare image files ...");
-	    }
-	    System.out.println(percentage);
-	    return percentage;
+		} catch (Exception e) {
+			System.out.println("Failed to compare image files ...");
+		}
+		System.out.println(percentage);
+		return percentage;
 	}
 
 	public void horizontalSwipe() {
@@ -309,4 +329,5 @@ public class CommonFunctions extends BaseClass {
 			}
 		}
 	}
+
 }

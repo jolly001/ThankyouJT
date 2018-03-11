@@ -1,9 +1,12 @@
 package com.ThankYouProject.pages;
 
+import org.openqa.selenium.By;
+
 import com.ThankYouProject.testBase.BaseClass;
 import com.ThankYouProject.utility.CommonFunctions;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 
@@ -47,5 +50,7 @@ public class Settings extends BaseClass {
 		extentTest.log(LogStatus.INFO, "Settings button is clicked");
 		common.verifyTitle("settingsPageTitle", driver, "setTitleTD");
 	}
+	
+	
 
 }
