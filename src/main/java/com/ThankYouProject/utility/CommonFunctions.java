@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +24,6 @@ import org.testng.Assert;
 import com.ThankYouProject.testBase.BaseClass;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.SwipeElementDirection;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -177,10 +174,6 @@ public class CommonFunctions extends BaseClass {
 		} else
 			Assert.assertTrue(false);
 	}
-	
-	public String timeStampGenerator(String message) throws Exception {
-		return message+ new SimpleDateFormat("MM-DD-YYYY-HH-MM-SS").format(new GregorianCalendar().getTime());
-	}
 
 	public String getText(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
 		String text = getWebElement(locator).getText();
@@ -207,24 +200,6 @@ public class CommonFunctions extends BaseClass {
 		driver.findElement(By.xpath("//android.widget.EditText[@text='Enter Number']")).sendKeys(numberAsString);
 		return numberAsString;
 
-	}
-	
-	public void methodForLogin() throws Exception{
-		//common method call to user login
-		click(("agreeBttn"), driver);
-		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
-		click("selectCountry", driver);
-		sendKeys("enterCountryname", driver, "countryNameTD");
-		click("india", driver);
-		randomnumgen();
-		click("verifybutton", driver);
-		sendKeys("enterCode", driver, "enterOtpTD");
-		sendKeys("enterUserName", driver, "newUserTD");
-		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
-		click("myFaithTab", driver);
-		sendKeys("enterGodName", driver, "newGodTD");
-		extentTest.log(LogStatus.INFO, "user is on God's profile and has entered God's name");
-		click("saveBtn", driver);
 	}
 
 	public TouchAction tap(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
@@ -329,5 +304,32 @@ public class CommonFunctions extends BaseClass {
 			}
 		}
 	}
-
+	public void methodForLogin() throws Exception{
+		//common method call to user login
+		click(("agreeBttn"), driver);
+		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
+		click("selectCountry", driver);
+		sendKeys("enterCountryname", driver, "countryNameTD");
+		click("india", driver);
+		randomnumgen();
+		click("verifybutton", driver);
+		sendKeys("enterCode", driver, "enterOtpTD");
+		sendKeys("enterUserName", driver, "newUserTD");
+		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
+		click("myFaithTab", driver);
+		sendKeys("enterGodName", driver, "newGodTD");
+		extentTest.log(LogStatus.INFO, "user is on God's profile and has entered God's name");
+		click("saveBtn", driver);
+	}
+	
+	public void methodForLoginforExistingUser() throws Exception{
+		click(("agreeBttn"), driver);
+		click("selectCountry", driver);
+		sendKeys("enterCountryname", driver, "countryNameTD");
+		click("india", driver);
+		sendKeys("enterNum", driver, "userANumTD");
+		click("verifybutton", driver);
+		sendKeys("enterCode", driver, "enterOtpTD");
+		Thread.sleep(6000);
+}
 }

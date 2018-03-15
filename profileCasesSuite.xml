@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke">
+
+	  <listeners>
+	<!-- 	<listener class-name="com.ThankYouProject.utility.listener_class"></listener> -->
+		 <listener class-name="com.ThankYouProject.utility.AnnotationTransformer"></listener> 
+	</listeners> 
+	
+  <test name="TC_004_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_004_Profile"/>
+    </classes>
+  </test>
+  <!-- <test name="TC_005_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_005_Profile"/>
+    </classes>
+  </test>
+  <test name="TC_006_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_006_Profile"/>
+    </classes>
+  </test>
+  <test name="TC_007_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_007_Profile"/>
+    </classes>
+  </test>
+  <test name="TC_008_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_008_Profile"/>
+    </classes>
+  </test>
+  <test name="TC_009_Profile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TC_009_Profile"/>
+    </classes>
+  </test>
+  <test name="TotestUserIsAbleToEditProfile">
+    <classes>
+      <class name="com.ThankYouProject.testCases.profile.TotestUserIsAbleToEditProfile"/>
+    </classes>
+  </test> -->
+  
+   <!-- Test -->
+</suite> <!-- Smoke -->

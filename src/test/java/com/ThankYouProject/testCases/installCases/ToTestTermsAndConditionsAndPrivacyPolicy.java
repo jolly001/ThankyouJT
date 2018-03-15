@@ -13,7 +13,8 @@ public class ToTestTermsAndConditionsAndPrivacyPolicy extends BaseClass {
 	HomePage obj;
 
 	@BeforeTest
-	public void setup() throws IOException {
+	public void setup() throws IOException, InterruptedException {
+		Thread.sleep(3000);
 		initialization();
 		obj = new HomePage(driver);
 	}

@@ -14,7 +14,8 @@ public class ToTestSpalshScreen extends BaseClass{
 	HomePage obj;
 
 	@BeforeTest
-	public void setup() throws IOException {
+	public void setup() throws IOException, InterruptedException {
+		Thread.sleep(3000);
 		initialization();
 		obj = new HomePage(driver);
 	}
@@ -22,7 +23,6 @@ public class ToTestSpalshScreen extends BaseClass{
 	@Test
 	public void toTestSpalshScreen() throws Exception {
 		extentTest.setDescription("To verify the splash screen");
-	
 		obj.splashScreen();
 		extentTest.log(LogStatus.PASS, "User is on splash screen");
 

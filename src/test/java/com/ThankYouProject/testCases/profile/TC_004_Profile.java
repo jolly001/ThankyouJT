@@ -20,7 +20,7 @@ public class TC_004_Profile extends BaseClass {
 
 	@Test
 	public void userSaveProfile() throws Exception {
-		obj.userNotAbleToSubmitProfileAfterSavingName();
+		obj.userNotAbleToSubmitProfileBeforeSavingName();
 
 	}
 

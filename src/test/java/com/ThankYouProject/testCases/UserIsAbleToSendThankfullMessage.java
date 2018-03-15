@@ -7,15 +7,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.ThankYouProject.pages.HomePage;
+import com.ThankYouProject.pages.Profile;
 import com.ThankYouProject.testBase.BaseClass;
 
 public class UserIsAbleToSendThankfullMessage extends BaseClass {
-	HomePage obj;
+	Profile obj;
 
 	@BeforeTest
 	public void setup() throws IOException {
 		initialization();
-		obj = new HomePage(driver);
+		obj = new Profile(driver);
 	}
 
 	@Test

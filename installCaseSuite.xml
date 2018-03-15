@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke">
+	<test name="MinimizeTheApp">
+		<classes>
+			<class name="com.ThankYouProject.testCases.installCases.MinimizeTheApp" />
+		</classes>
+	</test>
+	<test name="TC_M13_Install">
+		<classes>
+			<class name="com.ThankYouProject.testCases.installCases.TC_M13_Install" />
+		</classes>
+	</test>
+	<test name="ToTestSpalshScreen">
+		<classes>
+			<class
+				name="com.ThankYouProject.testCases.installCases.ToTestSpalshScreen" />
+		</classes>
+	</test>
+	<test name="ToTestTermsAndConditionsAndPrivacyPolicy">
+		<classes>
+			<class
+				name="com.ThankYouProject.testCases.installCases.ToTestTermsAndConditionsAndPrivacyPolicy" />
+		</classes>
+	</test>
+	<test name="WelcomeScreenAndAgreeButton">
+		<classes>
+			<class
+				name="com.ThankYouProject.testCases.installCases.WelcomeScreenAndAgreeButton" />
+		</classes>
+
+
+
+
+	</test> <!-- Test -->
+</suite> <!-- Smoke -->
