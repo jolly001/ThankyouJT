@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke">
+  <test name="tC_010_OTP">
+    <classes>
+      <class name="com.ThankYouProject.testCases.otp.tC_010_OTP"/>
+    </classes>
+  </test>
+  <test name="TC_011_OTP">
+    <classes>
+      <class name="com.ThankYouProject.testCases.otp.TC_011_OTP"/>
+    </classes>
+  </test>
+  <test name="TC_012_Otp">
+    <classes>
+      <class name="com.ThankYouProject.testCases.otp.TC_012_Otp"/>
+    </classes>
+  </test>
+  
+  
+   <!-- Test -->
+</suite> <!-- Suite -->

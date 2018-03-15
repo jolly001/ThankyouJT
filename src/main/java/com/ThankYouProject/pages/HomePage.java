@@ -4,17 +4,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.InvalidSelectorException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.touch.ScrollAction;
 import org.testng.Assert;
 
 import com.ThankYouProject.testBase.BaseClass;
 import com.ThankYouProject.utility.CommonFunctions;
 import com.relevantcodes.extentreports.LogStatus;
 
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.AndroidKeyCode;
@@ -34,10 +29,13 @@ public class HomePage extends BaseClass {
 
 	public void welcomeScreen() throws Exception {
 
+		String s = common.getText("welcomeScreenText", driver);
+		common.assertionMethod(s, driver, "welcomeScreentTextTD");
 		common.click("agreeBttn", driver);
+		String t = common.getText("enterNumHeader", driver);
+		common.assertionMethod(t, driver, "enterNumPlaceHolderTD");
 		extentTest.log(LogStatus.PASS, "User is able to click on Agree and Continue button");
-		String s = common.getText("enterNumScreen", driver);
-		common.assertionMethod(s, driver, "enerNumPageTitle");
+
 		extentTest.log(LogStatus.PASS, "User is on Enter Number Screen");
 
 	}
@@ -296,6 +294,9 @@ public class HomePage extends BaseClass {
 		common.click("india", driver);
 		common.sendKeys("enterNum", driver, "userANumTD");
 		common.click("verifybutton", driver);
+		// for (int i = 0; i < 5; i++) {
+		// common.click("allowPopup", driver);
+		// }
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		if (common.getWebElements("importButton").size() == 1) {
 			common.click("skip&conbutton", driver);
@@ -682,20 +683,6 @@ public class HomePage extends BaseClass {
 			beforeReceiveCount = Integer.parseInt(initial_count);
 			System.out.println("This is initial count" + " " + beforeReceiveCount);
 			common.click("tapOnSettings", driver);
-			Thread.sleep(1000);
-			driver.swipe(514, 1094, 426, 587, 2000);
-			common.click("logOutBtn", driver);
-			common.click("logouConfirmAlert", driver);
-			extentTest.log(LogStatus.INFO, "User B has logged out");
-			// Till here the initial count is stored and the app is closed
-		} else {
-			extentTest.log(LogStatus.INFO, "User B has logged in");
-			String initial_count = common.getText("userBScore", driver);
-			beforeReceiveCount = Integer.parseInt(initial_count);
-			System.out.println("This is initial count" + " " + beforeReceiveCount);
-			common.click("tapOnSettings", driver);
-			Thread.sleep(1000);
-			driver.swipe(514, 1094, 426, 587, 2000);
 			common.click("logOutBtn", driver);
 			common.click("logouConfirmAlert", driver);
 			extentTest.log(LogStatus.INFO, "User B has logged out");
@@ -769,8 +756,6 @@ public class HomePage extends BaseClass {
 			common.verifyTitle("thanksfullVerify", driver, "thankfulTextTD");
 			extentTest.log(LogStatus.INFO, "Message sent was Thankful");
 			common.click("tapOnSettings", driver);
-			Thread.sleep(1000);
-			driver.swipe(514, 1094, 426, 587, 2000);
 			common.click("logOutBtn", driver);
 			common.click("logouConfirmAlert", driver);
 			extentTest.log(LogStatus.INFO, "User A has logged out");
@@ -796,30 +781,11 @@ public class HomePage extends BaseClass {
 			// Assert.assertEquals(beforeReceiveCount, final_result);
 			if (afterReceieveCount == beforeReceiveCount + 1) {
 				Assert.assertTrue(true);
-				extentTest.log(LogStatus.PASS, "User B is able to see previous thanks");
-				extentTest.log(LogStatus.PASS,
-						"User B has received Thanks from User A and thanks count is auto incremened");
+				extentTest.log(LogStatus.PASS, "User B has received Thanks from User A");
 			} else {
 				Assert.assertTrue(false);
 			}
 
-		}
-
-		else {
-			extentTest.log(LogStatus.INFO, "User B has logged in");
-			System.out.println("This is initial count when B logs in again" + " " + beforeReceiveCount);
-			String After = common.getText("userBScore", driver);
-			afterReceieveCount = Integer.parseInt(After);
-			System.out.println("after count" + afterReceieveCount);
-			// Assert.assertEquals(beforeReceiveCount, final_result);
-			if (afterReceieveCount == beforeReceiveCount + 1) {
-				Assert.assertTrue(true);
-				extentTest.log(LogStatus.PASS, "User B is able to see previous thanks");
-				extentTest.log(LogStatus.PASS,
-						"User B has received Thanks from User A and thanks count is auto incremened");
-			} else {
-				Assert.assertTrue(false);
-			}
 		}
 
 	}
@@ -857,4 +823,66 @@ public class HomePage extends BaseClass {
 
 	}
 
-}
+	public void toTestTheReplyIcon() throws Exception {
+		common.methodForLoginforExistingUser();
+		Thread.sleep(15000);
+		// driver.swipe(548, 1241, 548, 843, 2000);
+		// String actualName = common.getText("userNameOnReplyIcon", driver);
+		// System.out.println(actualName);
+		// common.click("replyIcon", driver);
+		// Thread.sleep(2000);
+		// driver.swipe(678, 709, 678, 1090, 2000);
+		//// List<AndroidElement> selectedUser = driver.findElements(By.xpath(
+		//// "//android.support.v7.widget.RecyclerView[@resource-id='com.nature9.justthank:id/nb_recycle_view']"));
+		//// System.out.println(selectedUser.size() + "");
+		// // for (int i = 0; i < searchList.size(); i++) {
+		// // System.out.println("" + searchList.get(i).getText());
+		// //
+		// List<AndroidElement> name = driver
+		// .findElements(By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/name']"));
+		// System.out.println(name.size() + "");
+		// for (int i = 0; i < name.size(); i++) {
+		// System.out.println("" + name.get(i).getText());
+		// String expectedName = name.get(0).getText();
+		// System.out.println("This ----->" + expectedName);
+		// if (actualName == expectedName) {
+		// Assert.assertTrue(true);
+		// extentTest.log(LogStatus.PASS, "The user selected is same to which
+		// reply is to be sent");
+		// } else {
+		// Assert.assertTrue(true);
+		// }
+		// }
+
+		common.click("contactTab", driver);
+		List<AndroidElement> favContacts = driver.findElements(By.xpath("//*[contains(@resource-id,'ivStar')]"));
+		System.out.println(favContacts.size());
+		for (int i = 0; i < favContacts.size() - 2; i++) {
+			driver.findElements(By.xpath("//*[contains(@resource-id,'ivStar')]")).get(i).click();
+
+		}
+		List<AndroidElement> getFavContactsName = driver
+				.findElements(By.xpath("//*[contains(@resource-id,'tvContactName')]"));
+
+		// System.out.println(getFavContactsName.size());
+		for (int i = 0; i < getFavContactsName.size(); i++) {
+			//System.out.println(getFavContactsName.get(i).getText());
+			String fvContct1 = getFavContactsName.get(0).getText();
+			String favContact2 = getFavContactsName.get(1).getText();
+			System.out.println("This is fvpageuser"+favContact2);
+		}
+
+		common.click("verifyHomePage", driver);
+		List<AndroidElement> favUserSelOnHome = driver.findElements(By.xpath("//*[contains(@resource-id,'name')]"));
+		System.out.println(favUserSelOnHome.size());
+		for (int i = 0; i < favUserSelOnHome.size(); i++) {
+			//System.out.println(favUserSelOnHome.get(i).getText());
+			String fav0 = favUserSelOnHome.get(0).getText();
+			String fav1 = favUserSelOnHome.get(6).getText();
+			String fav2 = favUserSelOnHome.get(7).getText();
+			System.out.println("This is---->"+ fav2);
+
+		}
+		
+
+}}

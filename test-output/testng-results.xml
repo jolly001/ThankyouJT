@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="1" failed="1" ignored="0" total="2" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Smoke" duration-ms="28608" started-at="2018-03-15T17:51:05Z" finished-at="2018-03-15T17:51:34Z">
+    <groups>
+    </groups>
+    <test name="TC_004_Profile" duration-ms="28608" started-at="2018-03-15T17:51:05Z" finished-at="2018-03-15T17:51:34Z">
+      <class name="com.ThankYouProject.testCases.profile.TC_004_Profile">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="setup" is-config="true" duration-ms="24435" started-at="2018-03-15T23:21:05Z" finished-at="2018-03-15T23:21:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="beforeMethod" is-config="true" duration-ms="9" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.ThankYouProject.testCases.profile.TC_004_Profile.userSaveProfile() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="SKIP" signature="userSaveProfile()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="userSaveProfile" duration-ms="9" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:30Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.ThankYouProject.utility.CommonFunctions.getLocator(CommonFunctions.java:66)
+	at com.ThankYouProject.utility.CommonFunctions.getWebElement(CommonFunctions.java:58)
+	at com.ThankYouProject.utility.CommonFunctions.click(CommonFunctions.java:36)
+	at com.ThankYouProject.pages.Profile.userNotAbleToSubmitProfileBeforeSavingName(Profile.java:99)
+	at com.ThankYouProject.testCases.profile.TC_004_Profile.userSaveProfile(TC_004_Profile.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userSaveProfile -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="afterMethod" is-config="true" duration-ms="0" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=userSaveProfile status=SKIP method=TC_004_Profile.userSaveProfile()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="beforeMethod" is-config="true" duration-ms="1" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.ThankYouProject.testCases.profile.TC_004_Profile.userSaveProfile() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="FAIL" signature="userSaveProfile()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="userSaveProfile" duration-ms="2" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:30Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.ThankYouProject.utility.CommonFunctions.getLocator(CommonFunctions.java:66)
+	at com.ThankYouProject.utility.CommonFunctions.getWebElement(CommonFunctions.java:58)
+	at com.ThankYouProject.utility.CommonFunctions.click(CommonFunctions.java:36)
+	at com.ThankYouProject.pages.Profile.userNotAbleToSubmitProfileBeforeSavingName(Profile.java:99)
+	at com.ThankYouProject.testCases.profile.TC_004_Profile.userSaveProfile(TC_004_Profile.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.retryFailed(Invoker.java:1014)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1215)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userSaveProfile -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="afterMethod" is-config="true" duration-ms="3368" started-at="2018-03-15T23:21:30Z" finished-at="2018-03-15T23:21:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=userSaveProfile status=FAILURE method=TC_004_Profile.userSaveProfile()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="endTest()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="endTest" is-config="true" duration-ms="463" started-at="2018-03-15T23:21:33Z" finished-at="2018-03-15T23:21:33Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- endTest -->
+        <test-method status="PASS" signature="killApp()[pri:0, instance:com.ThankYouProject.testCases.profile.TC_004_Profile@197d671]" name="killApp" is-config="true" duration-ms="274" started-at="2018-03-15T23:21:33Z" finished-at="2018-03-15T23:21:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- killApp -->
+      </class> <!-- com.ThankYouProject.testCases.profile.TC_004_Profile -->
+    </test> <!-- TC_004_Profile -->
+  </suite> <!-- Smoke -->
+</testng-results>
