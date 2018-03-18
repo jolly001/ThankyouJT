@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Smoke]">
-  <listeners>
-    <listener class-name="com.ThankYouProject.utility.AnnotationTransformer"/>
-  </listeners>
-  <test name="TC_004_Profile(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="com.ThankYouProject.testCases.profile.TC_004_Profile">
+      <class name="com.ThankYouProject.testCases.homeCases.TC_018_Home_6">
         <methods>
-          <include name="userSaveProfile"/>
-          <include name="killApp"/>
-          <include name="setup"/>
           <include name="beforeMethod"/>
           <include name="afterMethod"/>
+          <include name="tC_018_heartsTextMapping"/>
+          <include name="setup"/>
           <include name="endTest"/>
         </methods>
-      </class> <!-- com.ThankYouProject.testCases.profile.TC_004_Profile -->
+      </class> <!-- com.ThankYouProject.testCases.homeCases.TC_018_Home_6 -->
     </classes>
-  </test> <!-- TC_004_Profile(failed) -->
-</suite> <!-- Failed suite [Smoke] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

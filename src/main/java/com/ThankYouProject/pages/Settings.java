@@ -25,7 +25,7 @@ public class Settings extends BaseClass {
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.randomnumgen();
+		common.getRandomPhoneNumber();
 		common.click("verifybutton", driver);
 		 extentTest.log(LogStatus.INFO, "Clicked on verify button");
 

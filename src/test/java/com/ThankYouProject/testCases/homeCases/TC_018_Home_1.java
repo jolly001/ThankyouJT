@@ -20,13 +20,13 @@ public class TC_018_Home_1 extends BaseClass {
 	@Test
 	public void tC_018_replyButton() throws Exception {
 		Thread.sleep(6000);
-		obj.toTestTheReplyIcon();
+		obj.toTestTheReplyIconAndFavContactsSelection();
 	}
 
-//	@AfterTest
-//	public void killApp() {
-//		driver.closeApp();
-//
-//	}
+	@AfterTest
+	public void killApp() {
+		driver.closeApp();
+
+	}
 
 }
