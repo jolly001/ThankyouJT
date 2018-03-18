@@ -5,8 +5,10 @@ import java.awt.image.DataBuffer;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import javax.imageio.ImageIO;
 
@@ -18,6 +20,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -130,7 +134,7 @@ public class CommonFunctions extends BaseClass {
 	// }
 
 	public void waitForVisibilityOfElement(String locator, AndroidDriver driver) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		try {
@@ -180,21 +184,31 @@ public class CommonFunctions extends BaseClass {
 		return text;
 	}
 
-	public int getSize(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
+	public boolean ifElementExistsAssert(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
 		int ele = getLocators(loc.getProperty(locator)).size();
-		if (ele == 1) {
+		if (ele >= 1) {
 			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "The element is visible");
+			return true;
 		} else {
 			Assert.assertTrue(false);
-			extentTest.log(LogStatus.PASS, "The element is not visible");
+			extentTest.log(LogStatus.FAIL, "The element is not visible");
+			return false;
 		}
-		return ele;
 	}
 
-	public String randomnumgen() {
-		Random rand = new Random();
-		int num = rand.nextInt(9000000) + 1000000;
+	public boolean ifElementExists(String locator, AndroidDriver<AndroidElement> driver) throws Exception {
+		int ele = getLocators(loc.getProperty(locator)).size();
+		if (ele >= 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getRandomPhoneNumber() {
+		Random random = new Random();
+		int num = random.nextInt(9000000) + 1000000;
 		int number = num;
 		String numberAsString = new Integer(number).toString();
 		driver.findElement(By.xpath("//android.widget.EditText[@text='Enter Number']")).sendKeys(numberAsString);
@@ -304,14 +318,14 @@ public class CommonFunctions extends BaseClass {
 			}
 		}
 	}
-	public void methodForLogin() throws Exception{
-		//common method call to user login
+
+	public void methodForLogin() throws Exception {
+		// common method call to user login
 		click(("agreeBttn"), driver);
 		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
 		click("selectCountry", driver);
 		sendKeys("enterCountryname", driver, "countryNameTD");
 		click("india", driver);
-		randomnumgen();
 		click("verifybutton", driver);
 		sendKeys("enterCode", driver, "enterOtpTD");
 		sendKeys("enterUserName", driver, "newUserTD");
@@ -320,16 +334,52 @@ public class CommonFunctions extends BaseClass {
 		sendKeys("enterGodName", driver, "newGodTD");
 		extentTest.log(LogStatus.INFO, "user is on God's profile and has entered God's name");
 		click("saveBtn", driver);
+		click("userTutorial", driver);
 	}
-	
-	public void methodForLoginforExistingUser() throws Exception{
+
+	public void methodForLoginforExistingUser(String userNumber) throws Exception {
 		click(("agreeBttn"), driver);
 		click("selectCountry", driver);
 		sendKeys("enterCountryname", driver, "countryNameTD");
 		click("india", driver);
-		sendKeys("enterNum", driver, "userANumTD");
+		sendKeys("enterNum", driver, userNumber);
 		click("verifybutton", driver);
 		sendKeys("enterCode", driver, "enterOtpTD");
 		Thread.sleep(6000);
-}
+	}
+
+	public void isVisibleByName(String name) {
+
+		if (!driver.findElements(By.name(name)).isEmpty()) {
+		}
+	}
+
+	public boolean isVisibleByXPath(String xPath) {
+		if (driver.findElements(By.xpath(xPath)).isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public void isVisibleByResourceId(String resourceId) {
+		if (!driver.findElements(By.id(resourceId)).isEmpty()) {
+		}
+	}
+
+	/**
+	 * This Method is used to select Contact from the list randomly
+	 * 
+	 * @param endRange
+	 * @return {@link Integer}
+	 */
+	public int ramdomSelectionWithinRange(int endRange) {
+		if (endRange - 1 >= 0) {
+			Random rand = new Random();
+			int value = rand.nextInt(endRange);
+			return value;
+		}
+		return 0;
+
+	}
 }

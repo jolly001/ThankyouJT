@@ -19,7 +19,7 @@ public class TC_Contact_008 extends BaseClass {
 
 	@Test
 	public void userIsAbleToAddContact() throws Exception {
-		obj.SelectedContact();
+		obj.scrollingContactsInHomePage();
 	}
 
 //	@AfterTest
@@ -31,6 +31,7 @@ public class TC_Contact_008 extends BaseClass {
 
 
 }
+
 
 
 

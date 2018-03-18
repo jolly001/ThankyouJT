@@ -3,15 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.ThankYouProject.testCases.homeCases.TC_018_Home_1">
+      <class name="com.ThankYouProject.testCases.homeCases.TC_018_Home_6">
         <methods>
-          <include name="setup"/>
           <include name="beforeMethod"/>
-          <include name="tC_018_replyButton"/>
           <include name="afterMethod"/>
+          <include name="tC_018_heartsTextMapping"/>
+          <include name="setup"/>
           <include name="endTest"/>
         </methods>
-      </class> <!-- com.ThankYouProject.testCases.homeCases.TC_018_Home_1 -->
+      </class> <!-- com.ThankYouProject.testCases.homeCases.TC_018_Home_6 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

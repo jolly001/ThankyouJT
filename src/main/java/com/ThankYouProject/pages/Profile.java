@@ -44,7 +44,7 @@ public class Profile extends BaseClass {
 		Thread.sleep(1000);
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
-		common.randomnumgen(); // generates 7 digis number
+		common.getRandomPhoneNumber(); // generates 7 digis number
 		common.click("verifybutton", driver);
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		extentTest.log(LogStatus.PASS, "User is able to register with digits between 7-13");
@@ -96,16 +96,16 @@ public class Profile extends BaseClass {
 	}
 
 	public void userNotAbleToSubmitProfileBeforeSavingName() throws Exception {
-		common.click(("agreeBttns"), driver);
+		common.click(("agreeBttn"), driver);
 		extentTest.log(LogStatus.INFO, "Clicked on Agree and Continue button");
 		common.click("selectCountry", driver);
 		common.sendKeys("enterCountryname", driver, "countryNameTD");
 		common.click("india", driver);
-		common.randomnumgen(); // generates 7 digits number
+		common.getRandomPhoneNumber(); // generates 7 digits number
 		common.click("verifybutton", driver);
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		common.click("saveBtn", driver);
-		common.getSize("enterUserNameToast", driver);
+		common.ifElementExistsAssert("enterUserNameToast", driver);
 		extentTest.log(LogStatus.INFO, "user is not able to save profile as name is required");
 		common.sendKeys("enterUserName", driver, "newUserTD");
 		extentTest.log(LogStatus.INFO, "user is on profile and has entered his name");
@@ -140,7 +140,7 @@ public class Profile extends BaseClass {
 		Thread.sleep(1000);
 		common.verifyTitle("enterNumHeader", driver, "enterNumTitleTD");
 		common.cleartext("enterNum", driver);
-		common.randomnumgen(); // generates 7 digits number
+		common.getRandomPhoneNumber(); // generates 7 digits number
 		common.click("verifybutton", driver);
 		common.sendKeys("enterCode", driver, "enterOtpTD");
 		common.sendKeys("enterUserName", driver, "newUserTD");
@@ -286,7 +286,7 @@ public class Profile extends BaseClass {
 			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "Verified that user is able to see the time stamp in given thanks tab");
 			common.click("givenThanksUserDetailspopup", driver);
-			common.getSize("clickgivenThankspopup", driver);
+			common.ifElementExistsAssert("clickgivenThankspopup", driver);
 			extentTest.log(LogStatus.PASS, "Verified that user is able to see the user details in given thanks tab");
 			common.click("clickgivenThankspopup", driver);
 		} else {
@@ -299,7 +299,7 @@ public class Profile extends BaseClass {
 			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "Verified that user is able to see the time stamp in received thanks tab");
 			common.click("givenThanksUserDetailspopup", driver);
-			common.getSize("receivedThanksUserDetailspopup", driver);
+			common.ifElementExistsAssert("receivedThanksUserDetailspopup", driver);
 			extentTest.log(LogStatus.PASS, "Verified that user is able to see the user details in received thanks tab");
 			common.click("receivedThanksUserDetailspopup", driver);
 		} else {

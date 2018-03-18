@@ -121,7 +121,7 @@ public class Contacts extends BaseClass {
 					By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/tvContactName']"));
 
 			for (int i = 0; i < searchList.size(); i++) {
-				System.out.println("" + searchList.get(i).getText());
+				// System.out.println("" + searchList.get(i).getText());
 				if (searchList.get(i).getText().contains(search)) {
 					Assert.assertTrue(true);
 					extentTest.log(LogStatus.PASS, "Search functionality is working");
@@ -141,7 +141,8 @@ public class Contacts extends BaseClass {
 						By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/tvContactName']"));
 
 				for (int j = 0; j < searchNumberList.size(); j++) {
-					System.out.println("" + searchNumberList.get(j).getText());
+					// System.out.println("" +
+					// searchNumberList.get(j).getText());
 					if (searchList.get(j).getText().contains(searchNumber)) {
 						Assert.assertTrue(true);
 						extentTest.log(LogStatus.PASS, "Search Number functionality is working");
@@ -149,16 +150,32 @@ public class Contacts extends BaseClass {
 
 					else {
 						Assert.assertFalse(false);
-
 					}
-
+					common.sendKeys("searchContact", driver, "");
 				}
 			}
 		}
-		
-		
+
+		// common.click("", driver);
+		List<AndroidElement> favoriteList = driver
+				.findElements(By.xpath("//android.widget.ImageView[@resource-id='com.nature9.justthank:id/ivStar']"));
+		System.out.println("FaVORITE lIST" + favoriteList.size() + "");
+
+		common.click("filterContact", driver);
 		common.click("favoriteSpinner", driver);
-		
+
+		List<AndroidElement> afterClickingSpinner = driver
+				.findElements(By.xpath("//android.widget.ImageView[@resource-id='com.nature9.justthank:id/ivStar']"));
+		System.out.println("After Clicking on favorite list" + afterClickingSpinner.size() + "");
+
+		if (favoriteList.size() == afterClickingSpinner.size()) {
+			Assert.assertTrue(true);
+
+		} else {
+			extentTest.log(LogStatus.PASS, "Search Number functionality is working");
+			Assert.assertFalse(false);
+		}
+
 	}
 
 	public void selectSearchContact() throws Exception {
@@ -232,25 +249,24 @@ public class Contacts extends BaseClass {
 	}
 
 	public void clickDoneButton() throws Exception {
-		common.methodForLoginforExistingUser();
+		common.methodForLoginforExistingUser(common.getTestData("userANumTD"));
 		Thread.sleep(3000);
 		common.click("contactTab", driver);
 		List<AndroidElement> list1 = driver.findElements(
 				By.xpath("//android.widget.CheckBox[@resource-id='com.nature9.justthank:id/cbContactCheck']"));
-		//System.out.println(list1.size() + "");
-	
-		
-		for(int i=0;i<list1.size();i++){
+		// System.out.println(list1.size() + "");
+
+		for (int i = 0; i < list1.size(); i++) {
 			list1.get(i).click();
 		}
-		
+
 		common.click("done", driver);
-		List<AndroidElement> list2 = driver.findElements(
-				By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/name']"));
-//		System.out.println(list2.size() + "");
-//		if(list1.equals(o)){}
-		
-		if(list1.size()==list2.size()){
+		List<AndroidElement> list2 = driver
+				.findElements(By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/name']"));
+		// System.out.println(list2.size() + "");
+		// if(list1.equals(o)){}
+
+		if (list1.size() == list2.size()) {
 			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "User is eqals to selected contact in the homepage");
 
@@ -258,36 +274,44 @@ public class Contacts extends BaseClass {
 			Assert.assertFalse(false);
 			extentTest.log(LogStatus.FAIL, "User is notequals to selected contact in the homepage");
 		}
-		
+
 	}
-//		
-	public void selectfavoriteContact() throws Exception{
-		
-		common.methodForLoginforExistingUser();
+
+	//
+	public void selectfavoriteContact() throws Exception {
+
+		common.methodForLoginforExistingUser(common.getTestData("userANumTD"));
 		Thread.sleep(3000);
 		common.click("contactTab", driver);
-		
-		List<AndroidElement> favoriteList = driver.findElements(
-				By.xpath("//android.widget.ImageView[@resource-id='com.nature9.justthank:id/ivStar']"));
+
+		List<AndroidElement> favoriteList = driver
+				.findElements(By.xpath("//android.widget.ImageView[@resource-id='com.nature9.justthank:id/ivStar']"));
 		System.out.println(favoriteList.size() + "");
 
-		for(int i=0;i<favoriteList.size();i++){
+		for (int i = 0; i < favoriteList.size(); i++) {
 			favoriteList.get(i).click();
 		}
-     if(favoriteList.size()!=0){
-    	 Assert.assertTrue(true);
+		if (favoriteList.size() != 0) {
+			Assert.assertTrue(true);
 			extentTest.log(LogStatus.PASS, "User is able to select favorite contact");
 
 		} else {
 			Assert.assertFalse(false);
 			extentTest.log(LogStatus.FAIL, "User is not able to select favorite contact  ");
-		}     
 		}
+	}
 
-	public void SelectedContact() throws Exception {
-		common.methodForLoginforExistingUser();
+	public void scrollingContactsInHomePage() throws Exception{
+		common.methodForLoginforExistingUser("userANumTD");
 		Thread.sleep(3000);
-		common.click("contactTab", driver);
-
+		List<AndroidElement> allContactsList = driver
+				.findElements(By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/name']"));
+		System.out.println("Contact List" + allContactsList.size() + "");
+		common.click("scrollingOnHomePage",driver);
+		
+		List<AndroidElement> afterScrolingContactsList = driver
+				.findElements(By.xpath("//android.widget.TextView[@resource-id='com.nature9.justthank:id/name']"));
+		System.out.println("Contact List" +afterScrolingContactsList.size() + "");
+		
 	}
 }

@@ -39,7 +39,6 @@ public class BaseClass {
 	public static ExtentReports extent;
 	public static ExtentTest extentTest;
 
-
 	public void initialization() throws IOException {
 		loadProperties();
 		driver = capabilities();
@@ -50,45 +49,51 @@ public class BaseClass {
 	static {
 		Calendar calendar = Calendar.getInstance();
 		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-		/*extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/ThankYouProject/testReport/"
-				+ formater.format(calendar.getTime()) + ".html", false);*/
+		/*
+		 * extent = new ExtentReports(System.getProperty("user.dir") +
+		 * "/src/test/java/com/ThankYouProject/testReport/" +
+		 * formater.format(calendar.getTime()) + ".html", false);
+		 */
 		extent = new ExtentReports(System.getProperty("user.dir") + "/src/test/java/com/ThankYouProject/testReport/"
 				+ "ThankyouProjectAutomationReport" + ".html", true);
-		
+
 	}
 
 	public void getresult(ITestResult result) throws IOException {
 		if (result.getStatus() == ITestResult.SUCCESS) {
 			extentTest.log(LogStatus.PASS, result.getName() + " test is pass");
 			String PassLabel = "<span style='border:1px solid green;border-radius: 5px; padding:1px;background:green;color:white;margin-right:2px;'>PASS</span>";
-			//String html = PassLabel + "<span style='color:green;'>" + " : Test is Pass" + "</span>";
+			// String html = PassLabel + "<span style='color:green;'>" + " :
+			// Test is Pass" + "</span>";
 			extentTest.log(LogStatus.PASS, PassLabel);
 
 		} else if (result.getStatus() == ITestResult.SKIP) {
-			extentTest.log(LogStatus.SKIP,result.getName() + " test is skipped and skip reason is:-" + result.getThrowable());
+			extentTest.log(LogStatus.SKIP,
+					result.getName() + " test is skipped and skip reason is:-" + result.getThrowable());
 		} else if (result.getStatus() == ITestResult.FAILURE) {
 			extentTest.log(LogStatus.FAIL, result.getName() + " test is failed" + result.getThrowable());
 			String FailLabel = "<span style='border:1px solid red;border-radius: 5px; padding:1px;background:red;color:white;margin-right:2px;'>FAIL</span>";
-			//String html = FailLabel + "<span style='color:red;'>" + " : Test is Failed" + "</span>";
+			// String html = FailLabel + "<span style='color:red;'>" + " : Test
+			// is Failed" + "</span>";
 
 			extentTest.log(LogStatus.FAIL, FailLabel);
 			String FailLabel1 = "<span style='border:1px solid red;border-radius: 5px; padding:1px;background:red;color:white;margin-right:2px;'>FAIL SCREENSHOT</span>";
 
 			extentTest.log(LogStatus.FAIL, FailLabel1);
-		
-			extentTest.log(LogStatus.FAIL, extentTest.addBase64ScreenShot("data:image/png;base64," + CaptureScreenForReport_Base64()));
+
+			extentTest.log(LogStatus.FAIL,
+					extentTest.addBase64ScreenShot("data:image/png;base64," + CaptureScreenForReport_Base64()));
 
 		} else if (result.getStatus() == ITestResult.STARTED) {
 			extentTest.log(LogStatus.INFO, result.getName() + " test is started");
 		}
 	}
-	
-	public static String CaptureScreenForReport_Base64() {
-       return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
-        
-      }
 
-	
+	public static String CaptureScreenForReport_Base64() {
+		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+
+	}
+
 	@AfterMethod()
 	public void afterMethod(ITestResult result) throws IOException {
 		getresult(result);
@@ -96,13 +101,15 @@ public class BaseClass {
 
 	@BeforeMethod()
 	public void beforeMethod(Method result) {
-		//extentTest = extent.startTest(result.getName());
+		// extentTest = extent.startTest(result.getName());
 
-		//extentTest = extent.startTest((this.getClass().getSimpleName() + "::" + result.getName()), result.getName());
+		// extentTest = extent.startTest((this.getClass().getSimpleName() + "::"
+		// + result.getName()), result.getName());
 		extentTest = extent.startTest(result.getName());
-		//extentTest = extent.startTest(result.getClass().getName());
-		
-		//extentTest = extent.startTest((this.getClass().getSimpleName()), result.getName());
+		// extentTest = extent.startTest(result.getClass().getName());
+
+		// extentTest = extent.startTest((this.getClass().getSimpleName()),
+		// result.getName());
 		extentTest.log(LogStatus.INFO, result.getName() + " test Started");
 
 		extentTest.assignAuthor("Nature9");
